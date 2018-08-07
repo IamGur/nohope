@@ -501,7 +501,7 @@ client.on('message', async(message) => {
         console.log(e.stack);
     };
   }
-});
+};
 
 client.on("guildCreate", guild => {
     const liveJoin = client.channels.get("475564252036464651"); 
