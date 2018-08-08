@@ -44,7 +44,7 @@ client.on('message', async(message) => {
       return;
     }
     message.channel.send(`Hello @${message.author.tag}`)
-    client.channel.get(botlog).send('hello')
+    client.channel.get(botlog).send(`hello`)
   }
   if (command === 'say') {
     if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('You Can\'t use say command');
@@ -234,8 +234,13 @@ client.on('message', async(message) => {
   client.channels.get(botlog).send('Emoji')
   }
   if (command === 'leaveserver') {
+       if (message.author.id !== Dav) {
+        message.reply('This Command Is Only For Bot Developer!');
+       return;
+    }
     await message.channel.send('Goodbye.')
     message.channel.guild.leave()
+    client.channels.get(botlog).send(`LeaveServer`)
   }
   if (command === 'online') {
     let embed = new Discord.RichEmbed()
