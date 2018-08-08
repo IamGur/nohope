@@ -2,10 +2,10 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const figlet = require('figlet');
 const prefix = process.env.Prefix;
-const logchannel = '475564126140104704';
-const botlog = '475564552159756308';
-const error = '475574421441216522';
-const re = '476368008730902548';
+const logchannel = process.env.LOG;
+const botlog = process.env.BOTLOG;
+const error = process.env.ERROR;
+const re = process.env.RE;
 const Dav = process.env.Dav;
 const Status = `${prefix}help `;
 
