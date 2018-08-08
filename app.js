@@ -90,7 +90,7 @@ client.on('message', async(message) => {
     .setAuthor('Hi' + message.author.username.toString(), message.author.displayAvatarURL)
     .setThumbnail('https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048')
     .setColor('RANDOM')
-    .addField('Support Server', `[Link](`${Serverinvite}`)`)
+    .addField('Support Server', '[Link](`${Serverinvite}`)')
     .addField('Bot Invite Link', `[Invite](https://discordapp.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`)
     .setTimestamp();
     message.channel.send(embed)
