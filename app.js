@@ -453,7 +453,7 @@ client.on('message', async(message) => {
     .setFooter("https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048")
     .addField('Support Server', `[Link](https://discord.gg/b3g8r4Y)`, inline = true)
     .addField('Bot Invite Link', `[Invite](https://discordapp.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`, inline = true)
-    .setFooter('Bot Developer process.env.DAVNAME',"https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048")
+    .setFooter("https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048")
     .setTimestamp();
     message.author.send(embed)
     message.channel.send('Check your dm', {reply: message})
