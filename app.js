@@ -11,7 +11,7 @@ const Status = `${prefix}help `;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`)
-    client.channels.get(logchannel).send(`**Bot Logged in as ${client.user.tag}\, ${client.guilds.size} Servers \, ${client.users.size} Users ${Dav} !** `);
+    client.channels.get(logchannel).send(`**Bot Logged in as ${client.user.tag}\, ${client.guilds.size} Servers \, ${client.users.size} Users Dav-ID${Dav} !** `);
     client.user.setPresence({ game: { name: `${Status}`, url: 'https://twitch.tv/....', type: 1 } });
 });
 client.on('message', async(message) => {
@@ -43,7 +43,7 @@ client.on('message', async(message) => {
       message.reply('This Command Is Only For Bot Developer!');
       return;
     }
-    message.channel.send(`Hello <@${message.author.tag}>`)
+    message.channel.send(`Hello @${message.author.tag}`)
     client.channel.get(botlog).send('hello')
   }
   if (command === 'say') {
