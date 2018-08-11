@@ -52,6 +52,18 @@ client.on('message', async(message) => {
         message.reply('You need to join a voice channel first!');
       }
   };
+  if (command === 'leave') {
+    if (!message.guild) return;
+          if (message.member.voiceChannel) {
+        message.member.voiceChannel.leave()
+          .then(connection => { // Connection is an instance of VoiceConnection
+            message.reply('I have successfully disconnected from the channel!');
+          })
+          .catch(console.log);
+      } else {
+        message.reply('You need to join a voice channel first!');
+      }
+  };
   if (command === 'hello') {
     if (message.author.id !== Dav) {
       message.reply('This Command Is Only For Bot Developer!');
