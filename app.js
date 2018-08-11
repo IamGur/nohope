@@ -56,7 +56,6 @@ client.on('message', async(message) => {
     if (!message.guild) return;
           if (message.member.voiceChannel) {
         message.member.voiceChannel.leave()
-          .then(connection => { // Connection is an instance of VoiceConnection
             message.reply('I have successfully disconnected from the channel!');
           })
           .catch(console.log);
