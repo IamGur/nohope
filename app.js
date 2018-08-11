@@ -12,7 +12,7 @@ const Status = `${prefix}help `;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`)
-    client.channels.get(logchannel).send(`**Bot Logged in as ${client.user.tag}\, ${client.guilds.size} Servers \, ${client.users.size} Users Dav-ID${Dav} !** `);
+    client.channels.get(logchannel).send(`**Bot Logged in as ${client.user.tag}\, ${client.guilds.size} Servers \, ${client.users.size} Users Dav-ID:${Dav} !** `);
     client.user.setPresence({ game: { name: `${Status}`, url: 'https://twitch.tv/....', type: 1 } });
 });
 client.on('message', async(message) => {
@@ -159,7 +159,7 @@ client.on('message', async(message) => {
       return;
   }
   let guilds = client.guilds.map((guild) => `**(${guild.name})**   (**Members:** ${guild.members.size})  (**Id:** ${guild.id})  (**Server Owner:** ${guild.owner.user.tag})`);
-  message.channel.send(`I'm on **${client.guilds.size} Servers**:\n${guilds.join ('\n')}`, { split: "\n" })
+  message.channel.send(`I'm on **${client.guilds.size}** Servers, Total Users: **${client.users.size}** \n**Servers**:\n${guilds.join ('\n')}`, { split: "\n" })
   client.channels.get(botlog).send('Servers')
   }
   if (command === 'ascii') {
