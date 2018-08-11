@@ -39,30 +39,6 @@ client.on('message', async(message) => {
     console.log('Ping')
     client.channels.get(botlog).send(`Ping`)
   }
-    if (command === 'join') {
-    if (!message.guild) return;
-      // Only try to join the sender's voice channel if they are in one themselves
-      if (message.member.voiceChannel) {
-        message.member.voiceChannel.join()
-          .then(connection => { // Connection is an instance of VoiceConnection
-            message.reply('I have successfully connected to the channel!');
-          })
-          .catch(console.log);
-      } else {
-        message.reply('You need to join a voice channel first!');
-      }
-  };
-  if (command === 'leave') {
-    if (!message.guild) return;
-          if (message.member.voiceChannel) {
-        message.member.voiceChannel.leave()
-            message.reply('I have successfully disconnected from the channel!');
-          })
-          .catch(console.log);
-      } else {
-        message.reply('You need to join a voice channel first!');
-      }
-  };
   if (command === 'hello') {
     if (message.author.id !== Dav) {
       message.reply('This Command Is Only For Bot Developer!');
