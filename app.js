@@ -531,7 +531,7 @@ client.on('message', async(message) => {
     .setThumbnail(message.author.displayAvatarURL)
     .addField(`Message: `,message.content)
     .setFooter(`DM Bot Messages | DM Logs`,`${message.author.displayAvatarURL}`)
-    client.channels.get(dm).send(embed)
+    client.channels.get(Dm).send(embed)
   };
 });
 
