@@ -520,6 +520,20 @@ client.on('message', async(message) => {
     };
   }
 });
+client.on('message', async(message) => {
+  if (message.author.bot) return undefined;
+  if(message.channel.type === "dm") {
+    let embed = new Discord.RichEmbed()
+    .setTimestamp()
+    .setTitle("Direct Message To The Bot")
+    .addField(`Sent By:`,`<@${message.author.id}>`)
+    .setColor("RANDOM")
+    .setThumbnail(message.author.displayAvatarURL)
+    .addField(`Message: `,message.content)
+    .setFooter(`DM Bot Messages | DM Logs`,`${message.author.displayAvatarURL}`)
+    client.users.get("324432889561219072").send(embed)
+  };
+});
 
 client.on("guildCreate", guild => {
     const liveJoin = client.channels.get("475564252036464651"); 
