@@ -7,7 +7,7 @@ const botlog = process.env.BOTLOG;
 const error = process.env.ERROR;
 const re = process.env.RE;
 const Dav = process.env.Dav;
-const Serverinvite = process.env.SERVERINVITE
+const Dm = process.env.DM;
 const Status = `${prefix}help `;
 
 client.on('ready', () => {
@@ -90,7 +90,7 @@ client.on('message', async(message) => {
     .setAuthor('Hi' + message.author.username.toString(), message.author.displayAvatarURL)
     .setThumbnail('https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048')
     .setColor('RANDOM')
-    .addField('Support Server', `[Link](https://discord.gg/tkhHakk)`)
+    .addField('Support Server', `[Link](https://discord.gg/7uU3MDD)`)
     .addField('Bot Invite Link', `[Invite](https://discordapp.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`)
     .setTimestamp();
     message.channel.send(embed)
@@ -446,13 +446,13 @@ client.on('message', async(message) => {
   if (command === 'help') {
     let embed = new Discord.RichEmbed()
     .setAuthor('Hi' + message.author.username.toString(), message.author.displayAvatarURL)
-    .setDescription(`Help Section \nPrefix = ${prefix} \nMore Commands Coming Soon😉`)
+    .setDescription(`\nPrefix = ${prefix} \nMore Commands Coming Soon😉`)
     .setThumbnail('https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048')
     .setColor('RANDOM')
     .addField('Bot Commands',`Ping - (Bot's ping) \nUptime (Bot's UpTime) \nInvite - (Bot Invite Link) `)
     .addField('Commands', `\nAvatar - (User's Avatar) \nUserinfo - (User Info) \nAscii -(Special Command) \nServerinfo (Server's Info) \nEmoji (Server's Emoji) \nCreateInvite (Create server invite) \nReverse (Reverse text) \nTime (UTC time) `)
     .addField('Modration command', `Delete - (Delete Multiple Messages)   \nKick -(Kick a user) \nBan - (Ban a user) \nWarn (Warn a user) \nRole (Add Role to user) \nRemoverole (Remove a role) \ndmall (DM to server members) \nReport (Report a user) \ `)
-    .addField('Support Server', `[Link](https://discord.gg/tkhHakk)`)
+    .addField('Support Server', `[Link](https://discord.gg/7uU3MDD)`)
     .addField('Bot Invite Link', `[Invite](https://discordapp.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`, inline = true)
     .setFooter('Bot Developer Gur#9649',"https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048")
     .setTimestamp();
@@ -531,7 +531,7 @@ client.on('message', async(message) => {
     .setThumbnail(message.author.displayAvatarURL)
     .addField(`Message: `,message.content)
     .setFooter(`DM Bot Messages | DM Logs`,`${message.author.displayAvatarURL}`)
-    client.users.get("324432889561219072").send(embed)
+    client.channels.get("324432889561219072").send(embed)
   };
 });
 
