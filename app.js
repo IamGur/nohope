@@ -118,7 +118,7 @@ client.on('message', async(message) => {
     });
   }
   if (command === 'dmall') {
-   if (message.guild.id = '472007724868304917') return (message.channel.send(`<@${message.author.id}> Command is disable on your server`));
+   /*if (message.guild.id = '472007724868304917') return (message.channel.send(`<@${message.author.id}> Command is disable on your server`));*/
   let member = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0])
     if(!message.member.hasPermission("ADMINISTRATOR"))
         return message.reply({embed: {
