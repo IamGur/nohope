@@ -454,7 +454,6 @@ client.on('message', async(message) => {
     .addField('Modration command', `Delete - (Delete Multiple Messages)   \nKick -(Kick a user) \nBan - (Ban a user) \nWarn (Warn a user) \nRole (Add Role to user) \nRemoverole (Remove a role) \ndmall (DM to server members) \nReport (Report a user) \ `)
     .addField('Support Server', `[Link](https://discord.gg/7uU3MDD)`)
     .addField('Bot Invite Link', `[Invite](https://discordapp.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`, inline = true)
-    .setFooter('Bot Developer Gur#9649',"https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048")
     .setTimestamp();
     message.author.send(embed)
     message.channel.send('Check your dm', {reply: message})
