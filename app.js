@@ -44,9 +44,75 @@ client.on('message', async(message) => {
       message.reply('This Command Is Only For Bot Developer!');
       return;
     }
-    message.channel.send(`Hello @${message.author.tag}`)
-    client.channel.get(botlog).send(`hello`)
-  }
+    let embed = new Discord.RichEmbed()
+    .setDescription(`Hello ${message.author.username} Have a great time 😉😎`)
+    .setColor('RANDOM')
+    .setFooter('Gur#9649', 'https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048' )
+    .setTimestamp();
+    message.channel.send(embed);
+    client.channels.get(botlog).send('hello')
+  };
+  if (command === 'rate') {
+    const cooldown = new Set()
+  if (cooldown.has(message.author.id)) {
+    let cooldownemb = new Discord.RichEmbed()
+    .setAuthor(`${message.author.username} Cooldown..`, message.author.displayAvatarURL)
+    .setDescription(`You need to wait 5 seconds!`)
+    .setColor(`RED`)
+    .setFooter(`This message will be deleted in 5 seconds..`)
+    return message.channel.send(cooldownemb).then(message => {
+     message.delete(5000) 
+    })
+    
+    }
+    cooldown.add(message.author.id);
+
+    setTimeout(() => {
+        cooldown.delete(message.author.id);
+    }, 10000);
+ let m421 = args.join(" ");
+  if (!m421) return message.channel.send('Please define a name.')
+  if (m421.length > 30) return message.channel.send(`I can't rate your waifu! It's over 30 text!`)
+  let result = Math.floor((Math.random() * 100) + 0);
+  
+    const happyrate = new Discord.RichEmbed()
+  .setDescription(`I would rate **${m421}** ${result}/100 ❤`)
+  .setColor(`GREEN`)
+    
+      const sadembed = new Discord.RichEmbed()
+  .setDescription(`I would rate **${m421}** ${result}/100 😭`)
+  .setColor(`GREEN`)
+      
+        const idkembed = new Discord.RichEmbed()
+  .setDescription(`I would rate **${m421}** ${result}/100 🤔`)
+  .setColor(`GREEN`)
+        
+      const shrugembed = new Discord.RichEmbed()
+  .setDescription(`I would rate **${m421}** ${result}/100 🤷`)
+  .setColor(`GREEN`)
+                
+          const okembed = new Discord.RichEmbed()
+  .setDescription(`I would rate **${m421}** ${result}/100 👌`)
+  .setColor(`GREEN`)
+                        
+const thumbupembed = new Discord.RichEmbed()
+  .setDescription(`I would rate **${m421}** ${result}/100 👍`)
+  .setColor(`GREEN`)
+
+const eyesembed = new Discord.RichEmbed()
+  .setDescription(`I would rate **${m421}** ${result}/100 👀`)
+  .setColor(`GREEN`)
+  
+  if (result > 90) return message.channel.send(happyrate)
+  if (result < 30) return message.channel.send(sadembed)
+  if (result > 40) return message.channel.send(idkembed)
+  if (result > 50) return message.channel.send(shrugembed)
+  if (result > 60) return message.channel.send(okembed)
+  if (result > 70) return message.channel.send(thumbupembed)
+  if (result > 80) return message.channel.send(eyesembed)
+  console.log('Rate')
+  client.channels.get(botlog).send('Rate')
+  };
   if (command === 'say') {
     if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('You Can\'t use say command');
     let say = args.join(' ');
@@ -57,6 +123,7 @@ client.on('message', async(message) => {
   if (command === 'delete' || command === 'clean' || command === 'clear') {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return errors.noPerms(message, "MANAGE_MESSAGES");
     if(!args[0]) return message.channel.send(`Example:[${prefix}Delete/Clean/Clear 100]`);
+     message.delete();
     message.channel.bulkDelete(args[0]).then(() => {
       message.channel.send(`Deleted ${args[0]} messages.`).then(msg => msg.delete(5000));
     })
@@ -103,17 +170,6 @@ client.on('message', async(message) => {
       .setColor('RANDOM')
       .setDescription(`**Permanent Invite Link**: ${invite}`);
       message.channel.send(embed);
-
-      let comm = client.channels.get(re)
-      let iembed = new Discord.RichEmbed()
-      .setColor('RANDOM')
-      .setDescription(`${message.author.tag} used Invite command`)
-      .addField(`**Invite Link**:, ${invite}`)
-      .addField('**Server-Name**', `${message.guild.name}`)
-      .addField('**Server-ID**:', `${message.guild.id}`)
-      .addField('**Server-Owner**:', `${message.guild.owner.user.tag}`)
-      .setTimestamp()
-      comm.send(comm, iembed);
       client.channels.get(botlog).send('CreateInvite')
     });
   }
