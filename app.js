@@ -36,8 +36,6 @@ client.on('message', async(message) => {
             .setTimestamp();
             message.edit(embed);
         });
-    console.log('Ping')
-    client.channels.get(botlog).send(`Ping`)
   }
   if (command === 'hello') {
     if (message.author.id !== Dav) {
@@ -50,7 +48,6 @@ client.on('message', async(message) => {
     .setFooter('Gur#9649', 'https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048' )
     .setTimestamp();
     message.channel.send(embed);
-    client.channels.get(botlog).send('hello')
   };
   if (command === 'rate') {
     const cooldown = new Set()
@@ -69,7 +66,7 @@ client.on('message', async(message) => {
 
     setTimeout(() => {
         cooldown.delete(message.author.id);
-    }, 10000);
+    }, 5000);
  let m421 = args.join(" ");
   if (!m421) return message.channel.send('Please define a name.')
   if (m421.length > 30) return message.channel.send(`I can't rate your waifu! It's over 30 text!`)
@@ -110,8 +107,6 @@ const eyesembed = new Discord.RichEmbed()
   if (result > 60) return message.channel.send(okembed)
   if (result > 70) return message.channel.send(thumbupembed)
   if (result > 80) return message.channel.send(eyesembed)
-  console.log('Rate')
-  client.channels.get(botlog).send('Rate')
   };
   if (command === 'say') {
     if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('You Can\'t use say command');
@@ -127,8 +122,6 @@ const eyesembed = new Discord.RichEmbed()
     message.channel.bulkDelete(args[0]).then(() => {
       message.channel.send(`Deleted ${args[0]} messages.`).then(msg => msg.delete(5000));
     })
-    console.log('Delete')
-    client.channels.get(botlog).send(`Delete`)
   }
   if (command === 'setstatus' || command === 'ss' ) {
     if (message.author.id !== ('324432889561219072')) return message.channel.send("Huh.");
@@ -149,8 +142,6 @@ const eyesembed = new Discord.RichEmbed()
     message.channel.send({ embed })
     message.react("✅");
     }
-  console.log('Setstatus')
-  client.channels.get(botlog).send(`Setstatus`)
   }
   if (command === 'invite') {
     let embed = new Discord.RichEmbed()
@@ -161,7 +152,6 @@ const eyesembed = new Discord.RichEmbed()
     .addField('Bot Invite Link', `[Invite](https://discordapp.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`)
     .setTimestamp();
     message.channel.send(embed)
-    client.channels.get(botlog).send('Invite')
   }
   if (command === 'createinvite' || command === 'ci') {
     if (!message.member.hasPermission("CREATE_INSTANT_INVITE")) return;
@@ -170,7 +160,6 @@ const eyesembed = new Discord.RichEmbed()
       .setColor('RANDOM')
       .setDescription(`**Permanent Invite Link**: ${invite}`);
       message.channel.send(embed);
-      client.channels.get(botlog).send('CreateInvite')
     });
   }
   if (command === 'dmall') {
@@ -217,7 +206,6 @@ const eyesembed = new Discord.RichEmbed()
   }
   let guilds = client.guilds.map((guild) => `**(${guild.name})**   (**Members:** ${guild.members.size})  (**Id:** ${guild.id})  (**Server Owner:** ${guild.owner.user.tag})`);
   message.channel.send(`I'm on **${client.guilds.size}** Servers, Total Users: **${client.users.size}** \n**Servers**:\n${guilds.join ('\n')}`, { split: "\n" })
-  client.channels.get(botlog).send('Servers')
   }
   if (command === 'ascii') {
     if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('You are not have permission.');
@@ -237,7 +225,6 @@ const eyesembed = new Discord.RichEmbed()
     .setColor('RANDOM')
     .setTimestamp();
     message.channel.send(embed)
-    client.channels.get(botlog).send('Avatar')
   }
   if (command === 'userinfo'|| command === 'ui') {
     let user = message.mentions.users.first();
@@ -252,7 +239,6 @@ const eyesembed = new Discord.RichEmbed()
     .setThumbnail(user.displayAvatarURL)
     .setTimestamp();
     message.channel.send(embed)
-    client.channels.get(botlog).send('Userinfo')
   }
 if (command === 'serverinfo' || command === 'si') {
     let online = message.guild.members.filter(m => m.user.presence.status !== "offline").size;
@@ -277,7 +263,6 @@ if (command === 'serverinfo' || command === 'si') {
         .setFooter('Developer Gur#9649 ', "https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048")
         .setTimestamp();
     message.channel.send(embed);
-    client.channels.get(botlog).send('ServerInfo')
   }
   if (command === 'emoji') {
     try {
@@ -290,7 +275,6 @@ if (command === 'serverinfo' || command === 'si') {
       message.channel.send(`**${err.name}: ${err.message}**`)
   }
 
-  client.channels.get(botlog).send('Emoji')
   }
   if (command === 'leaveserver') {
        if (message.author.id !== Dav) {
@@ -313,7 +297,6 @@ if (command === 'serverinfo' || command === 'si') {
 		.addField('Member Status', `**${message.guild.members.filter(o => o.presence.status === 'online').size}** Online\n**${message.guild.members.filter(i => i.presence.status === 'idle').size}** Idle/Away\n**${message.guild.members.filter(dnd => dnd.presence.status === 'dnd').size}** Do Not Disturb\n**${message.guild.members.filter(off => off.presence.status === 'offline').size}** Offline/Invisible\n**${message.guild.members.filter(s => s.presence.status === 'streaming').size}** Streaming`)
 		.setFooter(`Owner: ${message.guild.owner.user.tag}`)
   message.channel.send(embed);
-  client.channels.get(botlog).send('Online')
   }
   if (command === 'report') {
     let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
@@ -339,7 +322,6 @@ if (command === 'serverinfo' || command === 'si') {
     message.channel.send(`Done!`, {reply: message})
 
     return;
-    client.channels.get(botlog).send('Report')
   }
   if (command === 'restart') {
     if (message.author.id !== Dav) {
@@ -369,7 +351,6 @@ if (command === 'serverinfo' || command === 'si') {
     .addField('Input: ', '```' + `${args.join(' ')}` + '```')
     .addField('Output: ', '```' + `${sreverse}` + '```')
     message.channel.send({embed: reverseEmbed})
-    client.channels.get(botlog).send('Reverse')
   }
   if (command === 'time') {
     var today = new Date()
@@ -381,7 +362,6 @@ if (command === 'serverinfo' || command === 'si') {
     .addField("Today is", `\`${Day}\` ,\`${Month}\` ,\`${Year}\`\n\`Time of day:\` \`${today.toString().split(" ")[4]}\``)
     message.channel.send({ embed })
     message.react("🕰")
-  client.channels.get(botlog).send('Time')
   }
   if (command === 'uptime' || command === 'botuptime') {
     
@@ -394,7 +374,6 @@ if (command === 'serverinfo' || command === 'si') {
         .addField('Uptime', `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`)
         .setTimestamp();
     message.channel.send(embed);
-    client.channels.get(botlog).send('Uptime')
   }
   if (command === 'role' || command === 'addrole') {
     if(!message.member.hasPermission('MANAGE_MEMBERS')) return message.reply("***Sorry, you can't do that.***");
@@ -431,7 +410,6 @@ if (command === 'serverinfo' || command === 'si') {
     }catch(e){
       client.channels.get(error).send(`${e}`)
     }
-    client.channels.get(botlog).send('RemoveRole')
   }
   if (command === 'ban') {
     if (!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send('You don\'t have permission to ban members');
@@ -452,7 +430,6 @@ if (command === 'serverinfo' || command === 'si') {
     .setColor('RANDOM')
     .setTimestamp();
     message.channel.send(embed);
-    client.channels.get(botlog).send('Ban')
   }
   if (command === 'kick') {
     if (!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send('You don\'t have permission!');
@@ -472,7 +449,6 @@ if (command === 'serverinfo' || command === 'si') {
     .setColor('RANDOM')
     .setTimestamp();
     message.channel.send(kickEmbed);
-    client.channels.get(botlog).send('kick')
   }
   if (command === 'warn') {
     const command = 'warn';
@@ -488,34 +464,24 @@ if (command === 'serverinfo' || command === 'si') {
     warnUser.send(`***You have been warned from*** ${message.guild}. \n***Reason:*** ${reason}`).catch(err => {});
     message.channel.send(`*${warnUser.user.tag} has been warned*`)
 
-    let comm = client.channels.get(botlog)
-    let cembed = new Discord.RichEmbed()
-    .setColor('RANDOM')
-    .setAuthor(`${message.author.tag} used warn command`)
-    .setThumbnail(`${message.author.displayAvatarURL}`)
-    .addField('**Server-Name**:', `${message.guild.name}`)
-    .addField('**Server-ID**:', `${message.guild.id}`)
-    .addField('**Channel**:', `${message.channel}`)
-    .addField('**Reason:**', `${reason}`)
-    .setTimestamp();
-    comm.send(comm, cembed)
   }
   if (command === 'help') {
+
     let embed = new Discord.RichEmbed()
+    .setColor('RANDOM')
     .setAuthor('Hi' + message.author.username.toString(), message.author.displayAvatarURL)
-    .setDescription(`\nPrefix = ${prefix} \nMore Commands Coming Soon😉`)
+    .setDescription(`Prefix = ${prefix} \nMore Commands Coming Soon😉`)
     .setThumbnail('https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048')
     .setColor('RANDOM')
     .addField('Bot Commands',`Ping - (Bot's ping) \nUptime (Bot's UpTime) \nInvite - (Bot Invite Link) `)
     .addField('Commands', `\nAvatar - (User's Avatar) \nUserinfo - (User Info) \nAscii -(Special Command) \nServerinfo (Server's Info) \nEmoji (Server's Emoji) \nCreateInvite (Create server invite) \nReverse (Reverse text) \nTime (UTC time) `)
-    .addField('Modration command', `Delete - (Delete Multiple Messages)   \nKick -(Kick a user) \nBan - (Ban a user) \nUnban - (UnBan a user) \nWarn (Warn a user) \nRole (Add Role to user) \nRemoverole (Remove a role) \ndmall (DM to server members) \nReport (Report a user) \ `)
+    .addField('Modration command', `Delete - (Delete Multiple Messages)   \nKick -(Kick a user) \nBan - (Ban a user) \nUnban - (UnBan a user) \nWarn (Warn a user) \nRole (Add Role to user) \nRemoverole (Remove a role) \nReport (Report a user) \nDmall (DM to server members)`)
     .addField('Support Server', `[Link](https://discord.gg/7uU3MDD)`)
     .addField('Bot Invite Link', `[Invite](https://discordapp.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`, inline = true)
     .setTimestamp();
-    message.author.send(embed)
+
+    message.author.send(embed).catch(err => message.react('👎') + message.channel.send(embed) + client.channels.get(error).send(`**User: ${message.author.username}** **\nServer Name**: ${message.guild.name} **\nhelp command** \n${err}`))
     message.channel.send('Check your dm', {reply: message})
-    message.react("👌");
-    client.channels.get(botlog).send('Help')
   }
   if (command === 'inviteleaderboard') {
     let invites = await message.guild.fetchInvites().catch(error => {
@@ -535,7 +501,6 @@ if (command === 'serverinfo' || command === 'si') {
       .addField('Invites', `\`\`\`${possibleinvites.join('\n')}\`\`\``)
       .setTimestamp();
     message.channel.send(embed);
-  client.channels.get(botlog).send('Inviteleaderboard')
   }
   if (command === 'rolldice') {
     let replies = ["One", "Two", "Three", "Four", "Five", "Six"];
