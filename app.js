@@ -254,7 +254,7 @@ const eyesembed = new Discord.RichEmbed()
     message.channel.send(embed)
     client.channels.get(botlog).send('Userinfo')
   }
-  if (command === 'serverinfo' || command === 'si') {
+if (command === 'serverinfo' || command === 'si') {
     let online = message.guild.members.filter(m => m.user.presence.status !== "offline").size;
     let offline = message.guild.members.filter(m => m.user.presence.status === "offline").size;
     let servericon = message.guild.iconURL == null ? "https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048" : message.guild.iconURL;
@@ -278,6 +278,7 @@ const eyesembed = new Discord.RichEmbed()
         .setTimestamp();
     message.channel.send(embed);
     client.channels.get(botlog).send('ServerInfo')
+  }
   if (command === 'emoji') {
     try {
       let emojis;
