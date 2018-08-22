@@ -23,6 +23,29 @@ client.on('message', async(message) => {
   let args = message.content.slice(prefix.length).trim().split(' ');
   let command = args.shift().toLowerCase();
 try {
+    if (command === 'join') {
+    if (!message.guild) return;
+      // Only try to join the sender's voice channel if they are in one themselves
+      if (message.member.voiceChannel) {
+        message.member.voiceChannel.join()
+          .then(connection => { // Connection is an instance of VoiceConnection
+            message.reply('I have successfully connected to the channel!');
+          })
+          .catch(console.log);
+      } else {
+        message.reply('You need to join a voice channel first!');
+      }
+  };
+  if (command === 'leave') {
+    if (!message.guild) return;
+      // Only try to join the sender's voice channel if they are in one themselves
+      if (message.member.voiceChannel) {
+        message.member.voiceChannel.leave()
+        message.reply('I have successfully disconnected from channel');
+      } else {
+        message.reply('You need to join a voice channel first!');
+      }
+  };
   if (command === "ping") {
     let start = Date.now(); message.channel.send('Pong! ').then(message => { 
         let diff = (Date.now() - start); 
