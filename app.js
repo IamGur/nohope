@@ -22,7 +22,7 @@ client.on('message', async(message) => {
   let msg = message.content.toLowerCase();
   let args = message.content.slice(prefix.length).trim().split(' ');
   let command = args.shift().toLowerCase();
-
+try {
   if (command === "ping") {
     let start = Date.now(); message.channel.send('Pong! ').then(message => { 
         let diff = (Date.now() - start); 
@@ -539,6 +539,13 @@ if (command === 'serverinfo' || command === 'si') {
     } catch (e) {
         console.log(e.stack);
     };
+  }
+  } catch(e){
+  console.log(e.stack)
+    client.channels.get(error).send(`${e.stack}`);
+  } finally {
+  console.log(command)
+    client.channels.get(botlog).send(`${command}`);
   }
 });
 client.on('message', async(message) => {
