@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const figlet = require('figlet');
-const YTDL = require('ytdl-core');
 const prefix = process.env.Prefix;
 const logchannel = process.env.LOG;
 const botlog = process.env.BOTLOG;
@@ -16,18 +15,6 @@ client.on('ready', () => {
     client.channels.get(logchannel).send(`**Bot Logged in as ${client.user.tag}\, ${client.guilds.size} Servers \, ${client.users.size} Users Dav-ID:${Dav} !** `);
     client.user.setPresence({ game: { name: `${Status}`, url: 'https://twitch.tv/....', type: 1 } });
 });
-function play(connection, message) {
-  var server = servers[message.guild.id];
-
-  server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: "audioonly"}));
-
-  server.queue.shift();
-
-  server.dispatcher.on("end", function(){
-    if (server.queue[0]) play(connection, message);
-    else connection.disconnect();
-  });
-}
 client.on('message', async(message) => {
   if (!message.content.startsWith(prefix)) {
      return undefined;
@@ -583,55 +570,6 @@ if (command === 'serverinfo' || command === 'si') {
   console.log(command)
     client.channels.get(botlog).send(`${command}`);
   }
-});
-client.on('message', async(message) => {
-  var servers = [];
-  if (message.author.bot) return undefined;
-    if (!message.content.startsWith(prefix)) {
-       return undefined;
-    }
-    
-    let msg = message.content.toLowerCase();
-    let args = message.content.slice(prefix.length).trim().split(' ');
-    let command = args.shift().toLowerCase();
-    try {
-    if (command === 'play') {
-      if (!args[0]) {
-        message.channel.send('Please provide a link');
-        return;
-      }
-   
-      if (!message.member.voiceChannel) {
-        message.channel.send('You need to join a voice channel first!');
-        return;
-      }
-   
-      if (!servers[message.guild.id]) servers[message.guild.id] = {
-        queue: []
-      };
-   
-      var server = servers[message.guild.id];
-      server.queue.push(args[0]);
-      if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
-         play(connection, message);
-       });
-     };
-     if (command === 'skip') {
-       var server = servers[message.guild.id];
-       if (server.dispatcher) server.dispatcher.end();
-     }
-     if (command === 'stop') {
-       var server = servers[message.guilds.id];
-   
-       if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
-     }
-  } catch(e){
-    console.log(e.stack)
-      client.channels.get(error).send(`${e.stack}`);
-    } finally {
-    console.log(command)
-      client.channels.get(botlog).send(`${command}`);
-    }
 });
 client.on('message', async(message) => {
   if (message.author.bot) return undefined;
