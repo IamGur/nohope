@@ -36,11 +36,6 @@ try {
         message.reply('You need to join a voice channel first!');
       }
   };
-    if (command === 'buzzer') {
-    const fs = require('fs');
-    const stream = fs.createReadStream('./music/BUZZER.mp3');
-    connection.playStream(stream);
-    }
   if (command === 'leave') {
     if (!message.guild) return;
       // Only try to join the sender's voice channel if they are in one themselves
