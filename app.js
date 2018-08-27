@@ -564,11 +564,6 @@ if (command === 'serverinfo' || command === 'si') {
         console.log(e.stack);
     };
   }
-  if (command === 'auto') {
-  if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send('.....')
-  let cid = args[0].slice(3, -1)
-  autoroles.set(Autorole_${message.guild.id}, { guildid: message.guild.id, role: cid })
-  message.channel.send(Autorole is Set! Now anyone new to the server will be given the role of <@ & $ {cid}>.)}
   } catch(e){
   console.log(e.stack)
     client.channels.get(error).send(`${e.stack}`);
@@ -591,11 +586,6 @@ client.on('message', async(message) => {
     client.channels.get(Dm).send(embed)
   };
 });
-client.on('guildMemberRemove', member => db.set(roles${member.id}, member.roles));
-client.on('guildMemberAdd', async member => {
-  let guildid = await autoroles.fetch(`Autorole${member.guild.id}, { target: '.guildid' })
-  let rolea = await autoroles.fetch(Autorole${member.guild.id}`, { target: '.role' })
-  }
 client.on("guildCreate", guild => {
     const liveJoin = client.channels.get("475564252036464651"); 
     let liveJEmbed = new Discord.RichEmbed()
