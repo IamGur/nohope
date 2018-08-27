@@ -5,7 +5,9 @@
   "main": "app.js",
   "dependencies": {
     "discord.js": "^11.3.2",
-    "figlet": "^1.2.0"
+    "figlet": "^1.2.0",
+    "quick.db": "^6.3.2",
+    "quick.hook": "^1.4.0"
   },
   "devDependencies": {},
   "scripts": {
