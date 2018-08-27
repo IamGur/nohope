@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const figlet = require('figlet');
-const db = require('quick.db')
 const prefix = process.env.Prefix;
 const logchannel = process.env.LOG;
 const botlog = process.env.BOTLOG;
