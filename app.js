@@ -79,7 +79,20 @@ try {
     message.channel.send(embed);
 
   }
+  const status = new db.table('AFKs');
 
+  let afk = await status.fetch(message.author.id);
+
+  const embed = new Discord.MessageEmbed()
+    .setColor(0xffffff)
+
+  if (!afk) { 
+    embed.setFooter('You are now AFK.');
+    status.set(message.author.id, args.join(' ') || `Sorry, ${message.author.username} is AFK.`);
+  } else {
+    embed.setFooter('You are no longer AFK.'); 
+    status.delete(message.author.id);
+  }
 }}
   if (command === "ping") {
     let start = Date.now(); message.channel.send('Pong! ').then(message => { 
