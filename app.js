@@ -46,6 +46,40 @@ try {
         message.reply('You need to join a voice channel first!');
       }
   };
+  if (command === "afk") {
+  let status = new db.table('AFKs');
+
+  let authorStatus = await afk.fetch(message.author.id);
+
+  if (authorStatus) { 
+
+  const embed = new Discord.MessageEmbed()
+    .setColor(0xffffff)
+    .setFooter(`${message.author.username} is no longer AFK.`)
+	
+  message.channel.send(embed).then(i => i.delete({
+    timeout: 5000
+  }))
+  
+  afk.delete(message.author.id);
+
+  }
+
+  let mentioned = message.mentions.members.first();
+  if (mentioned) { 
+
+  let status = await afk.fetch(mentioned.id);
+
+  if (status) { 
+
+    const embed = new Discord.MessageEmbed()
+      .setColor(0xffffff)
+      .setFooter(status);
+    message.channel.send(embed);
+
+  }
+
+}}
   if (command === "ping") {
     let start = Date.now(); message.channel.send('Pong! ').then(message => { 
         let diff = (Date.now() - start); 
