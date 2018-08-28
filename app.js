@@ -15,6 +15,38 @@ client.on('ready', () => {
     client.channels.get(logchannel).send(`**Bot Logged in as ${client.user.tag}\, ${client.guilds.size} Servers \, ${client.users.size} Users Dav-ID:${Dav} !** `);
     client.user.setPresence({ game: { name: `${Status}`, url: 'https://twitch.tv/....', type: 1 } });
 });
+const db = require('quick.db');
+let status = new db.table('AFKs');
+let authorStatus = await afk.fetch(message.author.id);
+
+if (authorStatus) { 
+
+  const embed = new Discord.MessageEmbed()
+    .setColor(0xffffff)
+    .setFooter(`${message.author.username} is no longer AFK.`)
+	
+  message.channel.send(embed).then(i => i.delete({
+    timeout: 5000
+  }))
+  afk.delete(message.author.id);
+
+}
+
+let mentioned = message.mentions.members.first();
+if (mentioned) {
+  let status = await afk.fetch(mentioned.id);
+
+  if (status) {
+
+    const embed = new Discord.MessageEmbed()
+      .setColor(0xffffff)
+      .setFooter(status);
+    message.channel.send(embed);
+
+  }
+
+}
+
 client.on('message', async(message) => {
   if (!message.content.startsWith(prefix)) {
      return undefined;
@@ -47,49 +79,23 @@ try {
       }
   };
   if (command === "afk") {
+  const db = require('quick.db');
+
+  const status = new db.table('AFKs');
   let afk = await status.fetch(message.author.id);
-	  db = require('quick.db');
-  let status = new db.table('AFKs');
-
-  let authorStatus = await afk.fetch(message.author.id);
-
-  if (authorStatus) { 
-
-  const embed = new Discord.MessageEmbed()
-    .setColor(0xffffff)
-    .setFooter(`${message.author.username} is no longer AFK.`)
-	
-  message.channel.send(embed).then(i => i.delete({
-    timeout: 5000
-  }))
-  
-  afk.delete(message.author.id);
-
-  }
-  let status = await afk.fetch(mentioned.id);
-  let mentioned = message.mentions.members.first();
-  if (mentioned) { 
-
-  if (status) { 
-
-    const embed = new Discord.MessageEmbed()
-      .setColor(0xffffff)
-      .setFooter(status);
-    message.channel.send(embed);
-
-  }
-
   const embed = new Discord.MessageEmbed()
     .setColor(0xffffff)
 
-  if (!afk) { 
+  if (!afk) {
     embed.setFooter('You are now AFK.');
     status.set(message.author.id, args.join(' ') || `Sorry, ${message.author.username} is AFK.`);
   } else {
-    embed.setFooter('You are no longer AFK.'); 
+    embed.setFooter('You are no longer AFK.');
     status.delete(message.author.id);
   }
-}}
+
+  message.channel.send(embed);
+}
   if (command === "ping") {
     let start = Date.now(); message.channel.send('Pong! ').then(message => { 
         let diff = (Date.now() - start); 
