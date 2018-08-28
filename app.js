@@ -74,6 +74,18 @@ try {
     .setTimestamp();
     message.channel.send(embed);
   };
+  if (command === 'meme') {
+    const superagent = require('superagent');
+
+    let {body} = await superagent
+    .get(`https://api-to.get-a.life/meme`);
+  
+    let embed = new Discord.RichEmbed()
+    .setColor("RANDOM")
+    .setTitle(`${message.author.usen}`)
+    .setImage(body.url);
+    message.channel.send(embed);
+  }
   if (command === 'rate') {
     const cooldown = new Set()
   if (cooldown.has(message.author.id)) {
