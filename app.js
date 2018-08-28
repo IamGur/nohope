@@ -82,7 +82,7 @@ try {
   
     let embed = new Discord.RichEmbed()
     .setColor("RANDOM")
-    .setTitle(`😄`)
+    .setTitle('😄')
     .setImage(body.url);
     message.channel.send(embed);
   }
