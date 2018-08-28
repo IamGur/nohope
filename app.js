@@ -66,11 +66,9 @@ try {
   afk.delete(message.author.id);
 
   }
-
+  let status = await afk.fetch(mentioned.id);
   let mentioned = message.mentions.members.first();
   if (mentioned) { 
-
-  let status = await afk.fetch(mentioned.id);
 
   if (status) { 
 
