@@ -15,7 +15,15 @@ client.on('ready', () => {
     client.channels.get(logchannel).send(`**Bot Logged in as ${client.user.tag}\, ${client.guilds.size} Servers \, ${client.users.size} Users Dav-ID:${Dav} !** `);
     client.user.setPresence({ game: { name: `${Status}`, url: 'https://twitch.tv/....', type: 1 } });
 });
-const db = require('quick.db');
+
+client.on('message', async(message) => {
+  if (!message.content.startsWith(prefix)) {
+     return undefined;
+  }
+  let msg = message.content.toLowerCase();
+  let args = message.content.slice(prefix.length).trim().split(' ');
+  let command = args.shift().toLowerCase();
+	const db = require('quick.db');
 let status = new db.table('AFKs');
 let authorStatus = await afk.fetch(message.author.id);
 
@@ -46,14 +54,6 @@ if (mentioned) {
   }
 
 }
-
-client.on('message', async(message) => {
-  if (!message.content.startsWith(prefix)) {
-     return undefined;
-  }
-  let msg = message.content.toLowerCase();
-  let args = message.content.slice(prefix.length).trim().split(' ');
-  let command = args.shift().toLowerCase();
 try {
     if (command === 'join') {
     if (!message.guild) return;
