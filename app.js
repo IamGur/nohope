@@ -47,6 +47,7 @@ try {
       }
   };
   if (command === "afk") {
+	  db = require('quick.db');
   let status = new db.table('AFKs');
 
   let authorStatus = await afk.fetch(message.author.id);
