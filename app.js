@@ -79,8 +79,6 @@ try {
     message.channel.send(embed);
 
   }
-  const status = new db.table('AFKs');
-
   let afk = await status.fetch(message.author.id);
 
   const embed = new Discord.MessageEmbed()
