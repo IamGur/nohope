@@ -23,9 +23,10 @@ client.on('message', async(message) => {
   let msg = message.content.toLowerCase();
   let args = message.content.slice(prefix.length).trim().split(' ');
   let command = args.shift().toLowerCase();
-	const db = require('quick.db');
-let status = new db.table('AFKs');
-let authorStatus = await afk.fetch(message.author.id);
+  let afk = await status.fetch(message.author.id);
+  let db = require('quick.db');
+  let status = new db.table('AFKs');
+  let authorStatus = await afk.fetch(message.author.id);
 
 if (authorStatus) { 
 
