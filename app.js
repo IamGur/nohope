@@ -47,6 +47,7 @@ try {
       }
   };
   if (command === "afk") {
+  let afk = await status.fetch(message.author.id);
 	  db = require('quick.db');
   let status = new db.table('AFKs');
 
@@ -79,7 +80,6 @@ try {
     message.channel.send(embed);
 
   }
-  let afk = await status.fetch(message.author.id);
 
   const embed = new Discord.MessageEmbed()
     .setColor(0xffffff)
