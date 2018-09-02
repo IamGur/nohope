@@ -9,6 +9,7 @@ const re = process.env.RE;
 const Dav = process.env.Dav;
 const Dm = process.env.DM;
 const Status = `${prefix}help `;
+const serverlink = `https://discord.gg/7uU3MDD`;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`)
@@ -162,7 +163,7 @@ const eyesembed = new Discord.RichEmbed()
     .setAuthor('Hi' + message.author.username.toString(), message.author.displayAvatarURL)
     .setThumbnail('https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048')
     .setColor('RANDOM')
-    .addField('Support Server', `[Link](https://discord.gg/7uU3MDD)`)
+    .addField('Support Server', `[Link](${serverlink})`)
     .addField('Bot Invite Link', `[Invite](https://discordapp.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`)
     .setTimestamp();
     message.channel.send(embed)
@@ -254,23 +255,20 @@ const eyesembed = new Discord.RichEmbed()
     .setTimestamp();
     message.channel.send(embed)
   }
-if (command === 'serverinfo' || command === 'si') {
-    let online = message.guild.members.filter(m => m.user.presence.status !== "offline").size;
-    let offline = message.guild.members.filter(m => m.user.presence.status === "offline").size;
+  if (command === 'serverinfo' || command === 'si') {
     let servericon = message.guild.iconURL == null ? "https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048" : message.guild.iconURL;
     let embed = new Discord.RichEmbed()
         .setAuthor(message.guild.name + " info", servericon)
-        .setColor('RANDOM')
+        .setColor('#0c00ff')
         //.setDescription('Server Info')
         .addField('Server Owner:', message.guild.owner.user.tag , inline = true)
         .addField('Owner id:', `${message.guild.owner.id}`, inline = true)
-        .addField("Total Members", message.guild.memberCount, inline = true)
-        .addField('Members:', `Online ${online}/Offline ${offline}`, inline = true)
-        .addField('Text channel:', message.guild.channels.filter(e => e.type !== 'voice').size, inline = true)
-        .addField('Voice channels:', message.guild.channels.filter(e => e.type === 'voice').size, inline = true)
         .addField('Server Region:', message.guild.region, inline = true)
-        .addField('Totel Roles:', message.guild.roles.size, inline = true)
-        .addField('Role List',message.guild.roles.map(e => e).join(' '))
+        .addField('Channels', `${message.guild.channels.filter(e => e.type !== 'voice').size} Text channel \n${message.guild.channels.filter(e => e.type === 'voice').size} Voice channels`, inline = true)
+        .addField(`Members`, `Total Members ${message.guild.memberCount} \n${message.guild.members.filter(member => !member.user.bot).size} Humans \n${message.guild.members.filter(member => member.user.bot).size} Bots`, inline = true)
+        .addField('Member Status', `**${message.guild.members.filter(o => o.presence.status === 'online').size}** Online\n**${message.guild.members.filter(i => i.presence.status === 'idle').size}** Idle/Away\n**${message.guild.members.filter(dnd => dnd.presence.status === 'dnd').size}** Do Not Disturb\n**${message.guild.members.filter(off => off.presence.status === 'offline').size}** Offline/Invisible\n**${message.guild.members.filter(s => s.presence.status === 'streaming').size}** Streaming`, inline = true)
+        .addField(`Roles`, `${message.guild.roles.size} Totel Roles`)
+        .addField(`Role List`, `${message.guild.roles.map(e => e).join(' ')}`)
         .addField('Server Created At', message.guild.createdAt)
         .addField('You Joined', message.member.joinedAt)
         .setThumbnail(message.guild.iconURL)
@@ -278,6 +276,25 @@ if (command === 'serverinfo' || command === 'si') {
         .setTimestamp();
     message.channel.send(embed);
   }
+if (command === "info" || command === "botinfo") {
+    let embed = new Discord.RichEmbed()
+        .setTitle("Bot Info")
+        .setColor("RANDOM")
+        .setDescription(``)
+        .addField("Help Commamd", `${prefix}help`)
+        .addField("Total Servers", `${client.guilds.size}`, inline = true)
+        .addField("Total Channels", `${client.channels.size}`, inline = true)
+        .addField("Total Text Channels", `${client.channels.filter(e => e.type !== 'voice').size}`, inline = true)
+        .addField("Total Voice Channels", `${client.channels.filter(e => e.type === 'voice').size}`, inline = true)
+        .addField("Total Users", `${client.users.size}`, inline = true)
+        .addField(`Online Users`, `${message.guild.members.filter(o => o.presence.status === 'online').size}`, inline = true)
+        .addField("Support Server", `[link](${serverlink})`, inline = true)
+        .addField("Bot Invite Link", `[invite](https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`, inline = true)
+        .setThumbnail(`https://cdn.discordapp.com/avatars/476388312517574663/c110bf51cf9a6c34ad2720842d30e7eb.png?size=2048`)
+        .setURL(`https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`)
+        .setTimestamp();
+    message.channel.send(embed);
+}
   if (command === 'emoji') {
     try {
       let emojis;
@@ -563,7 +580,7 @@ if (command === 'serverinfo' || command === 'si') {
     .addField('Bot Commands',`Ping - (Bot's ping) \nUptime (Bot's UpTime) \nInvite - (Bot Invite Link) `)
     .addField('Commands', `\nAvatar - (User's Avatar) \nUserinfo - (User Info) \nAscii -(Special Command) \nServerinfo (Server's Info) \nEmoji (Server's Emoji) \nCreateInvite (Create server invite) \nReverse (Reverse text) \nTime (UTC time) `)
     .addField('Modration command', `Delete - (Delete Multiple Messages)   \nKick -(Kick a user) \nBan - (Ban a user) \nUnban - (UnBan a user) \nWarn (Warn a user) \nRole (Add Role to user) \nRemoverole (Remove a role) \nReport (Report a user) \nDmall (DM to server members)`)
-    .addField('Support Server', `[Link](https://discord.gg/7uU3MDD)`)
+    .addField('Support Server', `[Link](${serverlink})`)
     .addField('Bot Invite Link', `[Invite](https://discordapp.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`, inline = true)
     .setTimestamp();
 
