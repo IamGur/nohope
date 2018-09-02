@@ -25,29 +25,6 @@ client.on('message', async(message) => {
   let command = args.shift().toLowerCase();
  
 try {
-    if (command === 'join') {
-    if (!message.guild) return;
-      // Only try to join the sender's voice channel if they are in one themselves
-      if (message.member.voiceChannel) {
-        message.member.voiceChannel.join()
-          .then(connection => { // Connection is an instance of VoiceConnection
-            message.reply('I have successfully connected to the channel!');
-          })
-          .catch(console.log);
-      } else {
-        message.reply('You need to join a voice channel first!');
-      }
-  };
-  if (command === 'leave') {
-    if (!message.guild) return;
-      // Only try to join the sender's voice channel if they are in one themselves
-      if (message.member.voiceChannel) {
-        message.member.voiceChannel.leave()
-        message.reply('I have successfully disconnected from channel');
-      } else {
-        message.reply('You need to join a voice channel first!');
-      }
-  };
   if (command === "ping") {
     let start = Date.now(); message.channel.send('Pong! ').then(message => { 
         let diff = (Date.now() - start); 
@@ -538,6 +515,43 @@ if (command === 'serverinfo' || command === 'si') {
         message.channel.send(`<@${tomute.id}> has been unmuted!`);
     }, ms(mutetime));
 }
+  if (command === 'ginvite') {
+    if (message.author.id !== Dav) return;
+    let sv = client.guilds.get(args[0])
+    if (!sv) return message.channel.send(`Enter a valid guild id`)
+    sv.channels.random().createInvite({maxAge: 0}).then(a => message.channel.send(a.toString()))
+  }
+  if (command === 'idleave') {
+  if (message.author.id !== Dav) return;
+  let sv = client.guilds.get(args[0])
+  if (!sv) return message.channel.send(`Enter a valid guild id`)
+  sv.leave()
+  }
+  if (command === 'sayto') {
+    if(!args[0]) return message.channel.send('Please provide Channel ID')
+    let st = client.channels.get(args[0])
+    let sayto = args.join (" ").slice(18);
+    if(!sayto) return message.channel.send(`Message!`)
+    let embed = new Discord.RichEmbed()
+    .setColor("RANDOM")
+    .addField(`Message`, `${sayto}`)
+    .setThumbnail(`${message.author.avatarURL}`)
+    .setTimestamp();
+    message.delete();
+    st.send(embed);
+  }
+  if (command === 'sendtodm') {
+    let std = client.users.get(args[0])
+    let SENDTO = args.join (" ").slice(18);
+    if(!args[0]) return message.channel.send('Please provide User ID')
+    if(!SENDTO) return message.channel.send('Message!')
+    let embed = new Discord.RichEmbed()
+    .setColor("RANDOM")
+    .addField(`Message`, `${SENDTO}`)
+    .setTimestamp();
+    message.delete();
+    std.send(embed);
+  }
   if (command === 'help') {
 
     let embed = new Discord.RichEmbed()
