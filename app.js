@@ -543,6 +543,21 @@ if (command === "info" || command === "botinfo") {
   let sv = client.guilds.get(args[0])
   if (!sv) return message.channel.send(`Enter a valid guild id`)
   sv.leave()
+  }  
+ if(command === 'send') {
+    if (message.author.id !== Dav) return;
+    let sv = client.guilds.get(args[0])
+    let sayto = args.join (" ").slice(18);
+    if(!sayto) return message.channel.send(`Message!`)
+    if (!sv) return message.channel.send(`Enter a valid guild id`)
+    let embed = new Discord.RichEmbed()
+    .setColor("#0400ff")
+    .setDescription(``)
+    .addField(`Message`, `${sayto}`)
+    .setFooter(`Message Sent By ${message.author.tag}`, message.author.avatarURL)
+    .setTimestamp();
+    message.delete();
+    sv.channels.random().send(embed)
   }
   if (command === 'sayto') {
     if(!args[0]) return message.channel.send('Please provide Channel ID')
