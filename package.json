@@ -1,0 +1,17 @@
+{
+  "name": "bot",
+  "version": "1.0.0",
+  "description": "Bot",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gur",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "figlet": "^1.2.0",
+    "ms": "^2.1.1",
+    "superagent": "^3.8.3"
+  }
+}
