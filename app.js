@@ -7,6 +7,7 @@ const botlog = process.env.BOTLOG;
 const error = process.env.ERROR;
 const re = process.env.RE;
 const Dav = process.env.Dav;
+const Vip = process.env.Vip;
 const Dm = process.env.DM;
 const Status = `${prefix}help `;
 const serverlink = `https://discord.gg/7uU3MDD`;
@@ -41,7 +42,7 @@ try {
         });
   }
   if (command === 'hello') {
-    if (message.author.id !== Dav) {
+    if (message.author.id !== Dav && message.author.id !== Vip) {
       message.reply('This Command Is Only For Bot Developer!');
       return;
     }
@@ -124,7 +125,7 @@ const eyesembed = new Discord.RichEmbed()
   if (result > 80) return message.channel.send(eyesembed)
   };
   if (command === 'say') {
-    if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('You Can\'t use say command');
+    if(!message.member.hasPermission('MANAGE_MESSAGES') && message.author.id !== Dav && message.author.id !== Vip) return message.channel.send('You Can\'t use say command');
     let say = args.join(' ');
     message.delete();
     message.channel.send(say);
@@ -215,7 +216,7 @@ const eyesembed = new Discord.RichEmbed()
   comm.send(comm, cembed);
   }
   if (command === "servers") {
-    if (message.author.id !== Dav) {
+    if (message.author.id !== Dav && message.author.id !== Vip) {
       message.reply('This Command Is Only For Bot Developer!');
       return;
   }
@@ -243,17 +244,21 @@ const eyesembed = new Discord.RichEmbed()
   }
   if (command === 'userinfo'|| command === 'ui') {
     let user = message.mentions.users.first();
+    let member = message.guild.member(user);
     let embed = new Discord.RichEmbed()
     .setAuthor(`${user.username}'s Info`, user.displayAvatarURL)
     .setThumbnail(user.displayAvatarURL)
     .setColor('RANDOM')
-    .addField('Username', user.username, true)
-    .addField('Discrim', user.discriminator, true)
-    .addField('Status', user.presence.status, true)
-    .addField('Bot?', user.bot, true)
+    .addField('Username', user.tag, inline = true)
+    .addField('Status', user.presence.status, inline = true)
+    .addField('Bot?', user.bot,inline = true)
+    .addField('Registered at', user.createdAt,inline = true)
+    .addField('Joined at', member.joinedAt,inline = true)
+    .addField(`Roles [${member.roles.size}]`, member.roles.map(e => e).join(' '))
     .setThumbnail(user.displayAvatarURL)
     .setTimestamp();
     message.channel.send(embed)
+    client.channels.get(botlog).send('Userinfo')
   }
   if (command === 'serverinfo' || command === 'si') {
     let servericon = message.guild.iconURL == null ? "https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048" : message.guild.iconURL;
@@ -531,21 +536,23 @@ if (command === "info" || command === "botinfo") {
         tomute.removeRole(muterole.id);
         message.channel.send(`<@${tomute.id}> has been unmuted!`);
     }, ms(mutetime));
-}
-  if (command === 'ginvite') {
-    if (message.author.id !== Dav) return;
+ if (command === 'ginvite') {
+    if (message.author.id !== Dav && message.author.id !== Vip) return;
     let sv = client.guilds.get(args[0])
     if (!sv) return message.channel.send(`Enter a valid guild id`)
     sv.channels.random().createInvite({maxAge: 0}).then(a => message.channel.send(a.toString()))
+
+    let cembed = new Discord.RichEmbed()
+    .setColor('#0400ff')
+    .setAuthor(`${message.author.tag}`)
+    .setDescription(`${message.author.tag} Used ginvite Command`)
+    .addField(`Trying to create invite`,`${args[0]}`)
+    .setThumbnail(message.author.avatarURL)
+    .setTimestamp();
+    client.channels.get(acmd).send(cembed)
   }
-  if (command === 'idleave') {
-  if (message.author.id !== Dav) return;
-  let sv = client.guilds.get(args[0])
-  if (!sv) return message.channel.send(`Enter a valid guild id`)
-  sv.leave()
-  }  
- if(command === 'send') {
-    if (message.author.id !== Dav) return;
+  if(command === 'send') {
+    if (message.author.id !== Dav && message.author.id !== Vip) return;
     let sv = client.guilds.get(args[0])
     let sayto = args.join (" ").slice(18);
     if(!sayto) return message.channel.send(`Message!`)
@@ -558,31 +565,78 @@ if (command === "info" || command === "botinfo") {
     .setTimestamp();
     message.delete();
     sv.channels.random().send(embed)
+
+    let cembed = new Discord.RichEmbed()
+    .setColor('#0400ff')
+    .setAuthor(`${message.author.tag}`)
+    .setDescription(`${message.author.tag} Used Send Command`)
+    .addField(`Trying to send message`,`${args[0]}`)
+    .addField(`Message`, sayto)
+    .setThumbnail(message.author.avatarURL)
+    .setTimestamp();
+    client.channels.get(acmd).send(cembed)
   }
-  if (command === 'sayto') {
+  if (command === 'idleave') {
+  if (message.author.id !== Dav) return;
+  let sv = client.guilds.get(args[0])
+  if (!sv) return message.channel.send(`Enter a valid guild id`)
+  sv.leave()
+
+  let cembed = new Discord.RichEmbed()
+  .setColor('#0400ff')
+  .setAuthor(`${message.author.tag}`)
+  .setDescription(`${message.author.tag} Used idleave Command`)
+  .addField(`Trying to leave a server`,`${args[0]}`)
+  .setThumbnail(message.author.avatarURL)
+  .setTimestamp();
+  client.channels.get(acmd).send(cembed)
+  }
+  if (command === 'saytochannel') {
+    if (message.author.id !== Dav && message.author.id !== Vip) return;
     if(!args[0]) return message.channel.send('Please provide Channel ID')
     let st = client.channels.get(args[0])
-    let sayto = args.join (" ").slice(18);
-    if(!sayto) return message.channel.send(`Message!`)
+    let sendto = args.join (" ").slice(18);
+    if(!sendto) return message.channel.send(`Message!`)
     let embed = new Discord.RichEmbed()
     .setColor("RANDOM")
-    .addField(`Message`, `${sayto}`)
+    //.setTitle(`Message Sent By- ${message.author.username}`)
+    .addField(`Message`, `${sendto}`)
     .setThumbnail(`${message.author.avatarURL}`)
     .setTimestamp();
     message.delete();
     st.send(embed);
+
+    let cembed = new Discord.RichEmbed()
+    .setColor('#0400ff')
+    .setAuthor(`${message.author.tag}`)
+    .setDescription(`${message.author.tag} Used sendtochannel Command`)
+    .addField(`Trying to send message`,`${args[0]}`)
+    .addField(`Message`, sendto)
+    .setThumbnail(message.author.avatarURL)
+    .setTimestamp();
+    client.channels.get(acmd).send(cembed)
   }
   if (command === 'sendtodm') {
     let std = client.users.get(args[0])
-    let SENDTO = args.join (" ").slice(18);
+    let sayto = args.join (" ").slice(18);
     if(!args[0]) return message.channel.send('Please provide User ID')
-    if(!SENDTO) return message.channel.send('Message!')
+    if(!sayto) return message.channel.send('Message!')
     let embed = new Discord.RichEmbed()
     .setColor("RANDOM")
-    .addField(`Message`, `${SENDTO}`)
+    .addField(`Message`, `${sayto}`)
     .setTimestamp();
     message.delete();
     std.send(embed);
+
+    let cembed = new Discord.RichEmbed()
+    .setColor('#0400ff')
+    .setAuthor(`${message.author.tag}`)
+    .setDescription(`${message.author.tag} Used sendtodm Command`)
+    .addField(`Trying to send dm message`,`${args[0]}`)
+    .addField(`Message`, sayto)
+    .setThumbnail(message.author.avatarURL)
+    .setTimestamp();
+    client.channels.get(acmd).send(cembed)
   }
   if (command === 'help') {
 
