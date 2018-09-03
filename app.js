@@ -536,6 +536,7 @@ if (command === "info" || command === "botinfo") {
         tomute.removeRole(muterole.id);
         message.channel.send(`<@${tomute.id}> has been unmuted!`);
     }, ms(mutetime));
+  }
  if (command === 'ginvite') {
     if (message.author.id !== Dav && message.author.id !== Vip) return;
     let sv = client.guilds.get(args[0])
