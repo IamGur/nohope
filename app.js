@@ -538,6 +538,17 @@ if (command === "info" || command === "botinfo") {
         message.channel.send(`<@${tomute.id}> has been unmuted!`);
     }, ms(mutetime));
   }
+  if(command === 'admincmd' || command === 'admin') {
+    if (message.author.id !== Dav && message.author.id !== Vip) return;
+    let embed = new Discord.RichEmbed()
+    .setAuthor(`Hi ${message.author.username}`)
+    .setDescription(`Admin Commands`)
+    .setColor('#ff0000')
+    .addField('Commands', `[1][ ${prefix}Send ServerId Message] => [send message to server] \n[2][ ${prefix}Sendtodm UserId Message] => [send message to user] \n[3][ ${prefix}Sendtochannel ChannelID] => [send message to channel] \n[4][ ${prefix}Ginvite ServerId]  => [Create Invite with ServerId] \n[5][ ${prefix}Server] => [Bots Server's] \n[6][ ${prefix}Idleave ServerID] => [Leave a server with ServerId(ADMIN_ONLY)] \n[7][ ${prefix}Setstatus/SS Status] => [Set Bots Streaming Status(ADMIN_ONLY)] \n[8][ ${prefix}Restart] => [Restart Bot(ADMIN_ONLY)]`)
+    .setFooter(`Message Request By ${message.author.tag}`, `${message.author.avatarURL}`)
+    .setTimestamp();
+    message.channel.send(embed)
+  }
  if (command === 'ginvite') {
     if (message.author.id !== Dav && message.author.id !== Vip) return;
     let sv = client.guilds.get(args[0])
