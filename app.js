@@ -6,6 +6,7 @@ const logchannel = process.env.LOG;
 const botlog = process.env.BOTLOG;
 const error = process.env.ERROR;
 const re = process.env.RE;
+const acmd = process.env.Acmd;
 const Dav = process.env.Dav;
 const Vip = process.env.Vip;
 const Dm = process.env.DM;
