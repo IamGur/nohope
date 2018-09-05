@@ -8,7 +8,7 @@ const error = process.env.ERROR;
 const re = process.env.RE;
 const acmd = process.env.Acmd;
 const Dav = process.env.Dav;
-const Vip = process.env.Vip;
+const Staff = process.env.Staff;
 const Dm = process.env.DM;
 const Status = `${prefix}help `;
 const serverlink = `https://discord.gg/7uU3MDD`;
@@ -43,8 +43,8 @@ try {
         });
   }
   if (command === 'hello') {
-    if (message.author.id !== Dav && message.author.id !== Vip) {
-      message.reply('This Command Is Only For Bot Developer!');
+    if (message.author.id !== Dav && message.author.id !== Staff) {
+      message.reply('This Command Is Only For Bot Developer or Staff!');
       return;
     }
     let embed = new Discord.RichEmbed()
@@ -66,6 +66,15 @@ try {
     .setImage(body.url);
     message.channel.send(embed);
   }
+  if (command === 'reboot') {
+   if (message.author.id === Dav && message.author.id === Staff) {
+   message.channel.send(":gear: Restarting...")
+   client.destroy()
+   client.login(process.env.hello2)
+   message.channel.send(":gear: Restart has been done")
+  } else {
+  message.channel.send("This Command Is Only For Bot Developer or Staff!")
+  }}
   if (command === 'rate') {
     const cooldown = new Set()
   if (cooldown.has(message.author.id)) {
@@ -126,7 +135,7 @@ const eyesembed = new Discord.RichEmbed()
   if (result > 80) return message.channel.send(eyesembed)
   };
   if (command === 'say') {
-    if(!message.member.hasPermission('MANAGE_MESSAGES') && message.author.id !== Dav && message.author.id !== Vip) return message.channel.send('You Can\'t use say command');
+    if(!message.member.hasPermission('MANAGE_MESSAGES') && message.author.id !== Dav && message.author.id !== Staff) return message.channel.send('You Can\'t use say command');
     let say = args.join(' ');
     message.delete();
     message.channel.send(say);
@@ -141,7 +150,7 @@ const eyesembed = new Discord.RichEmbed()
     })
   }
   if (command === 'setstatus' || command === 'ss' ) {
-    if (message.author.id !== ('324432889561219072')) return message.channel.send("Huh.");
+    if (message.author.id !== Dav ) return message.channel.send("Huh.");
     const status = args.join(' ');
     if (status.length === 0) {
       const embed = new Discord.RichEmbed()
@@ -217,7 +226,7 @@ const eyesembed = new Discord.RichEmbed()
   comm.send(comm, cembed);
   }
   if (command === "servers") {
-    if (message.author.id !== Dav && message.author.id !== Vip) {
+    if (message.author.id !== Dav && message.author.id !== Staff) {
       message.reply('This Command Is Only For Bot Developer!');
       return;
   }
@@ -359,14 +368,6 @@ if (command === "info" || command === "botinfo") {
     message.channel.send(`Done!`, {reply: message})
 
     return;
-  }
-  if (command === 'restart') {
-    if (message.author.id !== Dav) {
-      message.reply('This Command Is Only For Bot Developer!');
-      return;
-  }
-  client.channels.get(logchannel).send("bot restarting");
-  process.exit()
   }
   if (command === 'reverse') {
     if(!args[0]) return message.channel.send('Correct usage: **!reverse (text to reverse)**');
@@ -539,7 +540,7 @@ if (command === "info" || command === "botinfo") {
     }, ms(mutetime));
   }
   if(command === 'admincmd' || command === 'admin') {
-    if (message.author.id !== Dav && message.author.id !== Vip) return;
+    if (message.author.id !== Dav && message.author.id !== Staff) return;
     let embed = new Discord.RichEmbed()
     .setAuthor(`Hi ${message.author.username}`)
     .setDescription(`Admin Commands`)
@@ -550,7 +551,7 @@ if (command === "info" || command === "botinfo") {
     message.channel.send(embed)
   }
  if (command === 'ginvite') {
-    if (message.author.id !== Dav && message.author.id !== Vip) return;
+    if (message.author.id !== Dav && message.author.id !== Staff) return;
     let sv = client.guilds.get(args[0])
     if (!sv) return message.channel.send(`Enter a valid guild id`)
     sv.channels.random().createInvite({maxAge: 0}).then(a => message.channel.send(a.toString()))
@@ -565,7 +566,7 @@ if (command === "info" || command === "botinfo") {
     client.channels.get(acmd).send(cembed)
   }
   if(command === 'send') {
-    if (message.author.id !== Dav && message.author.id !== Vip) return;
+    if (message.author.id !== Dav && message.author.id !== Staff) return;
     let sv = client.guilds.get(args[0])
     let sayto = args.join (" ").slice(18);
     if(!sayto) return message.channel.send(`Message!`)
@@ -605,7 +606,7 @@ if (command === "info" || command === "botinfo") {
   client.channels.get(acmd).send(cembed)
   }
   if (command === 'saytochannel') {
-    if (message.author.id !== Dav && message.author.id !== Vip) return;
+    if (message.author.id !== Dav && message.author.id !== Staff) return;
     if(!args[0]) return message.channel.send('Please provide Channel ID')
     let st = client.channels.get(args[0])
     let sendto = args.join (" ").slice(18);
@@ -630,6 +631,7 @@ if (command === "info" || command === "botinfo") {
     client.channels.get(acmd).send(cembed)
   }
   if (command === 'sendtodm') {
+    if (message.author.id !== Dav && message.author.id !== Staff) return;
     let std = client.users.get(args[0])
     let sayto = args.join (" ").slice(18);
     if(!args[0]) return message.channel.send('Please provide User ID')
