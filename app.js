@@ -66,15 +66,6 @@ try {
     .setImage(body.url);
     message.channel.send(embed);
   }
-  if (command === 'reboot') {
-   if (message.author.id === Dav && message.author.id === Staff) {
-   message.channel.send(":gear: Restarting...")
-   client.destroy()
-   client.login(process.env.hello2)
-   message.channel.send(":gear: Restart has been done")
-  } else {
-  message.channel.send("This Command Is Only For Bot Developer or Staff!")
-  }}
   if (command === 'rate') {
     const cooldown = new Set()
   if (cooldown.has(message.author.id)) {
@@ -550,6 +541,15 @@ if (command === "info" || command === "botinfo") {
     .setTimestamp();
     message.channel.send(embed)
   }
+  if (command === 'restart') {
+   if (message.author.id === Dav && message.author.id === Staff) {
+   message.channel.send(":gear: Restarting...")
+   client.destroy()
+   client.login(process.env.hello2)
+   message.channel.send(":gear: Restart has been done")
+  } else {
+  message.channel.send("This Command Is Only For Bot Developer or Staff!")
+  }}
  if (command === 'ginvite') {
     if (message.author.id !== Dav && message.author.id !== Staff) return;
     let sv = client.guilds.get(args[0])
