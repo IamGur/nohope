@@ -542,13 +542,13 @@ if (command === "info" || command === "botinfo") {
     message.channel.send(embed)
   }
   if (command === 'restart') {
-   if (message.author.id !== Dav && message.author.id === Staff) {
+   if (message.author.id !== Dav) {
    message.channel.send(":gear: Restarting...")
    client.destroy()
    client.login(process.env.hello2)
    message.channel.send(":gear: Restart has been done")
   } else {
-  message.channel.send("This Command Is Only For Bot Developer or Staff!")
+  message.channel.send("This Command Is Only For Bot ADMIN!")
   }}
  if (command === 'ginvite') {
     if (message.author.id !== Dav && message.author.id !== Staff) return;
