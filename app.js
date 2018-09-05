@@ -542,7 +542,7 @@ if (command === "info" || command === "botinfo") {
     message.channel.send(embed)
   }
   if (command === 'restart') {
-   if (message.author.id !=== Dav && message.author.id === Staff) {
+   if (message.author.id !== Dav && message.author.id === Staff) {
    message.channel.send(":gear: Restarting...")
    client.destroy()
    client.login(process.env.hello2)
