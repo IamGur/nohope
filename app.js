@@ -221,8 +221,17 @@ const eyesembed = new Discord.RichEmbed()
       message.reply('This Command Is Only For Bot Developer!');
       return;
   }
-  let guilds = client.guilds.map((guild) => `**(${guild.name})**   (**Members:** ${guild.members.size})  (**Id:** ${guild.id})  (**Server Owner:** ${guild.owner.user.tag})`);
-  message.channel.send(`I'm on **${client.guilds.size}** Servers, Total Users: **${client.users.size}** \n**Servers**:\n${guilds.join ('\n')}`, { split: "\n" })
+    let string = '';
+    client.guilds.forEach(guild => {
+        string += '================================='+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' + '**Server ID:**` ' + guild.id +' ` ' + '\n' + '**Server Owner:**`' + guild.owner.user.tag +' ` '+'\n' +'**Server Owner Id:**` ' + guild.owner.user.id + ' ` ' +'\n' + '**Members:**`' + guild.members.size +' ` '+ '\n' + '**Online Members**`' + guild.members.filter(o => o.presence.status === 'online').size +' ` '+'\n'+'================================='+'\n\n';
+    })
+	  
+    let embed = new Discord.RichEmbed()
+        .setColor("#000FF")
+        .addField(`I'm on ${client.guilds.size} Servers, Total Users: ${client.users.size}  `, string)
+        .setTimestamp()
+        .setFooter(message.author.username, message.author.avatarURL);
+    message.channel.send(embed);
   }
   if (command === 'ascii') {
     if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('You are not have permission.');
