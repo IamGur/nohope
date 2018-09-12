@@ -222,10 +222,11 @@ const eyesembed = new Discord.RichEmbed()
       return;
   }
     let string = '';
+
     client.guilds.forEach(guild => {
         string += '================================='+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' + '**Server ID:**` ' + guild.id +' ` ' + '\n' + '**Server Owner:**`' + guild.owner.user.tag +' ` '+'\n' +'**Server Owner Id:**` ' + guild.owner.user.id + ' ` ' +'\n' + '**Members:**`' + guild.members.size +' ` '+ '\n' + '**Online Members**`' + guild.members.filter(o => o.presence.status === 'online').size +' ` '+'\n'+'================================='+'\n\n';
     })
-	  
+
     let embed = new Discord.RichEmbed()
         .setColor("#000FF")
         .addField(`I'm on ${client.guilds.size} Servers, Total Users: ${client.users.size}  `, string)
