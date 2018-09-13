@@ -237,7 +237,7 @@ const eyesembed = new Discord.RichEmbed()
     let string = '';
 
     client.guilds.forEach(guild => {
-        string += '================================='+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' + '**Server ID:**` ' + guild.id +' ` ' +'\n';
+        string += '===='+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' + '**Server ID:**` ' + guild.id +' ` ' +'\n';
     });
 
     let e1embed = new Discord.RichEmbed()
@@ -250,7 +250,7 @@ const eyesembed = new Discord.RichEmbed()
 
     let string1 = '';
     client.guilds.forEach(guild => {
-      string1 += '================================='+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' + '**Server Owner:**`' + guild.owner.user.tag +' ` '+'\n' +'**Server Owner Id:**` ' + guild.owner.user.id + ' ` ' +'\n';
+      string1 += '===='+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' + '**Server Owner:**`' + guild.owner.user.tag +' ` '+'\n' +'**Server Owner Id:**` ' + guild.owner.user.id + ' ` ' +'\n';
     });
     let e2embed = new Discord.RichEmbed()
     .setColor("#000FF")
@@ -262,7 +262,7 @@ const eyesembed = new Discord.RichEmbed()
 
     let string2 = '';
     client.guilds.forEach(guild => {
-      string2 += '================================='+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' + '**Members:**`' + guild.members.size +' ` '+ '\n' + '**Online Members**`' + guild.members.filter(o => o.presence.status === 'online').size +' ` '+'\n';
+      string2 += '===='+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' + '**Members:**`' + guild.members.size +' ` '+ '\n' + '**Online Members**`' + guild.members.filter(o => o.presence.status === 'online').size +' ` '+'\n';
     });
     let e3embed = new Discord.RichEmbed()
     .setColor("#000FF")
