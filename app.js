@@ -250,24 +250,33 @@ const eyesembed = new Discord.RichEmbed()
 
     let string1 = '';
     client.guilds.forEach(guild => {
-      string1 += '_____'+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' + '**Server Owner:**`' + guild.owner.user.tag +' ` '+'\n' +'**Server Owner Id:**` ' + guild.owner.user.id + ' ` ' +'\n';
+      string1 += '_____'+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' + '**Server Owner:**`' + guild.owner.user.tag +' ` '+'\n';
     });
     let e2embed = new Discord.RichEmbed()
     .setColor("#000FF")
-    .setAuthor(`Server Owner Name or Id`)
-    .addField(`I'm on ${client.guilds.size} Servers, Total Users: ${client.users.size}  `, string1)
+    .addField(`Server Owner Name`, string1)
     .setFooter(message.author.username, message.author.avatarURL)
     .setTimestamp();
     message.channel.send(e2embed);
 
     let string2 = '';
     client.guilds.forEach(guild => {
-      string2 += '_____'+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' + '**Members:**`' + guild.members.size +' ` '+ '\n' + '**Online Members**`' + guild.members.filter(o => o.presence.status === 'online').size +' ` '+'\n';
+      string2 += '_____'+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' +'**Server Owner Id:**` ' + guild.owner.user.id + ' ` ' +'\n';
+    });
+    let e2embed = new Discord.RichEmbed()
+    .setColor("#000FF")
+    .addField(`Server Owner Id `, string2)
+    .setFooter(message.author.username, message.author.avatarURL)
+    .setTimestamp();
+    message.channel.send(e2embed);
+
+    let string3 = '';
+    client.guilds.forEach(guild => {
+      string3 += '_____'+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' + '**Members:**`' + guild.members.size +' ` '+ '\n' + '**Online Members**`' + guild.members.filter(o => o.presence.status === 'online').size +' ` '+'\n';
     });
     let e3embed = new Discord.RichEmbed()
     .setColor("#000FF")
-    .setAuthor(`Total Members or Online Members`)
-    .addField(`I'm on ${client.guilds.size} Servers, Total Users: ${client.users.size}  `, string2)
+    .addField(`Total Members or Online Members `, string3)
     .setFooter(message.author.username, message.author.avatarURL)
     .setTimestamp();
     message.channel.send(e3embed);
