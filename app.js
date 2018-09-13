@@ -263,23 +263,23 @@ const eyesembed = new Discord.RichEmbed()
     client.guilds.forEach(guild => {
       string2 += '_____'+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' +'**Server Owner Id:**` ' + guild.owner.user.id + ' ` ' +'\n';
     });
-    let e2embed = new Discord.RichEmbed()
+    let e3embed = new Discord.RichEmbed()
     .setColor("#000FF")
     .addField(`Server Owner Id `, string2)
     .setFooter(message.author.username, message.author.avatarURL)
     .setTimestamp();
-    message.channel.send(e2embed);
+    message.channel.send(e3embed);
 
     let string3 = '';
     client.guilds.forEach(guild => {
       string3 += '_____'+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' + '**Members:**`' + guild.members.size +' ` '+ '\n' + '**Online Members**`' + guild.members.filter(o => o.presence.status === 'online').size +' ` '+'\n';
     });
-    let e3embed = new Discord.RichEmbed()
+    let e4embed = new Discord.RichEmbed()
     .setColor("#000FF")
     .addField(`Total Members or Online Members `, string3)
     .setFooter(message.author.username, message.author.avatarURL)
     .setTimestamp();
-    message.channel.send(e3embed);
+    message.channel.send(e4embed);
   }
   if (command === 'ascii') {
     if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('You are not have permission.');
