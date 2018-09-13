@@ -181,29 +181,42 @@ const eyesembed = new Discord.RichEmbed()
   }
   if (command === 'dmall') {
    /*if (message.guild.id = '472007724868304917') return (message.channel.send(`<@${message.author.id}> Command is disable on your server`));*/
+  let DMALL = args.join(" ").slice(0);
   let member = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0])
-    if(!message.member.hasPermission("ADMINISTRATOR"))
-        return message.reply({embed: {
-          color: 0xC64540,
-          description: "No permission."
-        }});
-    let DMALL = args.join(" ").slice(0);
-  if (!DMALL) return message.channel.send({embed: {
-    color: 0xC64540,
-    description: `${message.member} Please enter a message to dm all the players in the discord server.`
-  }});
+  let doneembed = new Discord.RichEmbed()
+  .setColor('#04ff00')
+  .setAuthor(`Hi ${message.author.username}`)
+  .setDescription('All members in this discord server have got your message.')
+  .setFooter(message.author.username, message.author.avatarURL)
+  .setTimestamp();
+  let nopermsembed = new Discord.RichEmbed()
+  .setColor('#0400ff')
+  .setAuthor(`Hi ${message.author.username}`)
+  .setDescription('You are not have [ADMINISTRATOR] Permission')
+  .setFooter(message.author.username, message.author.avatarURL)
+  .setTimestamp();
+  let addmessageembed = new Discord.RichEmbed()
+  .setColor('#0400ff')
+  .setDescription(`${message.member} Please enter a message`)
+  .addField('usage', `${prefix}DMALL Message`)
+  .setTimestamp();
+  let messageembed = new Discord.RichEmbed()
+  .setColor('#ff0000')
+  .setAuthor(`Message From [${message.guild.name}]`)
+  .addField('Message', `${DMALL}`)
+  .setFooter(`Message Sent by ${message.author.tag}`, message.author.avatarURL)
+  .setTimestamp();
+
+  if(!message.member.hasPermission("ADMINISTRATOR")) 
+   return message.channel.send(nopermsembed)
+
+  if (!DMALL) return message.channel.send(addmessageembed) 
 
   message.guild.members.forEach((player) => {
-      message.guild.member(player).send({embed: {
-        color: 0x00c1c1,
-        title: `**Server-Name**: ${message.guild.name} `,
-        description: `${DMALL}`
-      }});
+      message.guild.member(player).send(messageembed)
   });
-  message.channel.send({embed: {
-    color: 0xC64540,
-    description: "All players in this discord server have got your message."
-  }});
+  message.channel.send(doneembed)
+  
   let comm = client.channels.get(botlog)
   let cembed = new Discord.RichEmbed()
   .setColor('RANDOM')
