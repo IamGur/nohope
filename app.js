@@ -14,6 +14,27 @@ const Status = `${prefix}help `;
 const serverlink = `https://discord.gg/7uU3MDD`;
 const db = require('quick.db');
 
+let status = new db.table('AFKs');
+let authorStatus = await afk.fetch(message.author.id);
+if (authorStatus) {
+  const embed = new Discord.MessageEmbed()
+    .setColor(0xffffff)
+    .setFooter(`${message.author.username} is no longer AFK.`)	
+  message.channel.send(embed).then(i => i.delete({
+    timeout: 5000
+  })) 
+  afk.delete(message.author.id);
+}
+let mentioned = message.mentions.members.first(); 
+if (mentioned) {
+  let status = await afk.fetch(mentioned.id);
+  if (status) {
+    const embed = new Discord.MessageEmbed()
+      .setColor(0xffffff)
+      .setFooter(status);
+    message.channel.send(embed);
+  }
+}
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`)
     client.channels.get(logchannel).send(`**Bot Logged in as ${client.user.tag}\, ${client.guilds.size} Servers \, ${client.users.size} Users Dav-ID:${Dav} !** `);
@@ -55,6 +76,22 @@ try {
     .setTimestamp();
     message.channel.send(embed);
   };
+  if (command === 'afk') {
+  const status = new db.table('AFKs');
+  let afk = await status.fetch(message.author.id);
+
+  const embed = new Discord.MessageEmbed()
+    .setColor(0xffffff)
+
+  if (!afk) { 
+    embed.setFooter('You are now AFK.');
+    status.set(message.author.id, args.join(' ') || `Sorry, ${message.author.username} is AFK.`);
+  } else { 
+    embed.setFooter('You are no longer AFK.');
+    status.delete(message.author.id);
+  }
+  message.channel.send(embed);
+  }
   if (command === 'meme') {
     const superagent = require('superagent');
 
