@@ -30,6 +30,7 @@ client.on('message', async(message) => {
  
 try {
  let status = new db.table('AFKs');
+ let afk = await status.fetch(message.author.id);
 let authorStatus = await afk.fetch(message.author.id);
 if (authorStatus) {
   const embed = new Discord.MessageEmbed()
