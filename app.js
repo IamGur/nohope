@@ -13,6 +13,10 @@ const Dm = process.env.DM;
 const Status = `${prefix}help `;
 const serverlink = `https://discord.gg/7uU3MDD`;
 const db = require('quick.db');
+let fetched = await db.fetch(`prefix_${message.guild.id}`);
+if (fetched === null) prefix = process.env.Prefix;
+else prefix = fetched;
+
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`)
@@ -29,28 +33,6 @@ client.on('message', async(message) => {
   let command = args.shift().toLowerCase();
  
 try {
- let status = new db.table('AFKs');
-let authorStatus = await afk.fetch(message.author.id);
-let afk = await status.fetch(message.author.id);
-if (authorStatus) {
-  const embed = new Discord.MessageEmbed()
-    .setColor(0xffffff)
-    .setFooter(`${message.author.username} is no longer AFK.`)	
-  message.channel.send(embed).then(i => i.delete({
-    timeout: 5000
-  })) 
-  afk.delete(message.author.id);
-}
-let mentioned = message.mentions.members.first(); 
-if (mentioned) {
-  let status = await afk.fetch(mentioned.id);
-  if (status) {
-    const embed = new Discord.MessageEmbed()
-      .setColor(0xffffff)
-      .setFooter(status);
-    message.channel.send(embed);
-  }
-}
   if (command === "ping") {
     let start = Date.now(); message.channel.send('Pong! ').then(message => { 
         let diff = (Date.now() - start); 
@@ -77,21 +59,20 @@ if (mentioned) {
     .setTimestamp();
     message.channel.send(embed);
   };
-  if (command === 'afk') {
-  const status = new db.table('AFKs');
-  let afk = await status.fetch(message.author.id);
+  if (command === 'prefix') {
+   if (!message.member.hasPermission('ADMINISTRATOR') && message.author.id !== Dav) return message.channel.send('Sorry, you don\'t have permission to change server prefix')
+	.then(msg => msg.delete({
+		timeout: 10000
+	}));
+if (!args.join(' ')) return message.channel.send('Please provide a prefix to change server prefix')
+	.then(msg => msg.delete({
+		timeout: 10000
+	}));
 
-  const embed = new Discord.MessageEmbed()
-    .setColor(0xffffff)
-
-  if (!afk) { 
-    embed.setFooter('You are now AFK.');
-    status.set(message.author.id, args.join(' ') || `Sorry, ${message.author.username} is AFK.`);
-  } else { 
-    embed.setFooter('You are no longer AFK.');
-    status.delete(message.author.id);
-  }
-  message.channel.send(embed);
+db.set(`prefix_${message.guild.id}`, args.join(' '))
+	.then(i => {
+		message.channel.send(`Server Prefix has been changed to ${i}`);
+	})
   }
   if (command === 'meme') {
     const superagent = require('superagent');
