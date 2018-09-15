@@ -831,37 +831,4 @@ client.on("guildCreate", guild => {
         icon: `https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048`
     })
   });
-  
-const fs = require('fs');
-  client.on("guildCreate", guild =>{
-    console.log(`Root is now part of the ${guild.name}, ${guild.id} and has ${guild.memberCount} new members.`);
-    if (!fs.existsSync(`${guild.id}`)){
-      fs.mkdirSync(`${guild.id}`);
-   }
-  });
-  
-  
-  client.on('guildMemberAdd', member => {
-    let logschannel = member.guild.channels.find(`name`, "logs");
-    console.log(`${member.user.username} is now part of guid and had his account created.`);
-    var filepath = `${member.guild.id}/${member.user.id}.json`;
-    if (fs.existsSync(filepath)) {
-      const embed = new Discord.RichEmbed()
-      .setAuthor(`${member.user.username} is a former member and is back to (o) ${member.guild}.`,`${member.user.avatarURL}`)
-      .setColor(`RANDOM`)
-      client.channels.get('475564252036464651').send(embed);
-    }
-    else{
-    var fileContent = `{`+`\n"nome":"${member.user.username}",\n"id":"${member.user.id}",\n"avatar":"${member.user.avatarURL}",\n""description":"standard description","warnings":"0",
-    "Contribute":"0""\n\n`+`}`;
-    var filepath = `${member.guild.id}/${member.user.id}.json`;
-    fs.writeFile(filepath, fileContent, (err) => {
-      if (err) throw err;
-    });
-    const embed = new Discord.RichEmbed()
-    .setAuthor(`${member.user.username} is a new member in the ${member.guild}.`,`${member.user.avatarURL}`)
-    .setColor(`RANDOM`)
-    client.channels.get('475564252036464651').send(embed);
-    }
-  });
 client.login(process.env.hello2);
