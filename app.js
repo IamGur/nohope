@@ -12,7 +12,6 @@ const Staff = process.env.Staff;
 const Dm = process.env.DM;
 const Status = `${prefix}help `;
 const serverlink = `https://discord.gg/7uU3MDD`;
-const db = require('quick.db');
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`)
@@ -29,10 +28,6 @@ client.on('message', async(message) => {
   let command = args.shift().toLowerCase();
  
 try {
-  let fetched = await db.fetch(`prefix_${message.guild.id}`);
-if (fetched === null) prefix = process.env.Prefix;
-else prefix = fetched;
-	
   if (command === "ping") {
     let start = Date.now(); message.channel.send('Pong! ').then(message => { 
         let diff = (Date.now() - start); 
@@ -59,21 +54,6 @@ else prefix = fetched;
     .setTimestamp();
     message.channel.send(embed);
   };
-  if (command === 'prefix') {
-   if (!message.member.hasPermission('ADMINISTRATOR') && message.author.id !== Dav) return message.channel.send('Sorry, you don\'t have permission to change server prefix')
-	.then(msg => msg.delete({
-		timeout: 10000
-	}));
-if (!args.join(' ')) return message.channel.send('Please provide a prefix to change server prefix')
-	.then(msg => msg.delete({
-		timeout: 10000
-	}));
-
-db.set(`prefix_${message.guild.id}`, args.join(' '))
-	.then(i => {
-		message.channel.send(`Server Prefix has been changed to ${i}`);
-	})
-  }
   if (command === 'meme') {
     const superagent = require('superagent');
 
