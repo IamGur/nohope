@@ -12,6 +12,7 @@
     "discord.js": "^11.4.2",
     "figlet": "^1.2.0",
     "ms": "^2.1.1",
+    "fs": "0.0.1-security",
     "superagent": "^3.8.3"
   }
 }
