@@ -14,7 +14,22 @@ const Status = `${prefix}help `;
 const serverlink = `https://discord.gg/7uU3MDD`;
 const db = require('quick.db');
 
-let status = new db.table('AFKs');
+client.on('ready', () => {
+    console.log(`Logged in as ${client.user.tag}!`)
+    client.channels.get(logchannel).send(`**Bot Logged in as ${client.user.tag}\, ${client.guilds.size} Servers \, ${client.users.size} Users Dav-ID:${Dav} !** `);
+    client.user.setPresence({ game: { name: `${Status}`, url: 'https://twitch.tv/....', type: 1 } });
+});
+
+client.on('message', async(message) => {
+  if (!message.content.startsWith(prefix)) {
+     return undefined;
+  }
+  let msg = message.content.toLowerCase();
+  let args = message.content.slice(prefix.length).trim().split(' ');
+  let command = args.shift().toLowerCase();
+ 
+try {
+ let status = new db.table('AFKs');
 let authorStatus = await afk.fetch(message.author.id);
 if (authorStatus) {
   const embed = new Discord.MessageEmbed()
@@ -35,21 +50,6 @@ if (mentioned) {
     message.channel.send(embed);
   }
 }
-client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`)
-    client.channels.get(logchannel).send(`**Bot Logged in as ${client.user.tag}\, ${client.guilds.size} Servers \, ${client.users.size} Users Dav-ID:${Dav} !** `);
-    client.user.setPresence({ game: { name: `${Status}`, url: 'https://twitch.tv/....', type: 1 } });
-});
-
-client.on('message', async(message) => {
-  if (!message.content.startsWith(prefix)) {
-     return undefined;
-  }
-  let msg = message.content.toLowerCase();
-  let args = message.content.slice(prefix.length).trim().split(' ');
-  let command = args.shift().toLowerCase();
- 
-try {
   if (command === "ping") {
     let start = Date.now(); message.channel.send('Pong! ').then(message => { 
         let diff = (Date.now() - start); 
