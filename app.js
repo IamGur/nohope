@@ -12,7 +12,7 @@ const Staff = process.env.Staff;
 const Dm = process.env.DM;
 const Status = `${prefix}help `;
 const serverlink = `https://discord.gg/7uU3MDD`;
-const db = require('quick.db')
+const db = require('quick.db');
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`)
