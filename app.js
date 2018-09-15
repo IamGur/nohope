@@ -13,10 +13,6 @@ const Dm = process.env.DM;
 const Status = `${prefix}help `;
 const serverlink = `https://discord.gg/7uU3MDD`;
 const db = require('quick.db');
-let fetched = await db.fetch(`prefix_${message.guild.id}`);
-if (fetched === null) prefix = process.env.Prefix;
-else prefix = fetched;
-
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`)
@@ -33,6 +29,10 @@ client.on('message', async(message) => {
   let command = args.shift().toLowerCase();
  
 try {
+  let fetched = await db.fetch(`prefix_${message.guild.id}`);
+if (fetched === null) prefix = process.env.Prefix;
+else prefix = fetched;
+	
   if (command === "ping") {
     let start = Date.now(); message.channel.send('Pong! ').then(message => { 
         let diff = (Date.now() - start); 
