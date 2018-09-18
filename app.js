@@ -12,6 +12,10 @@ const Staff = process.env.Staff;
 const Dm = process.env.DM;
 const Status = `${prefix}help `;
 const serverlink = `https://discord.gg/7uU3MDD`;
+const server1 = process.env.server1;
+const server2 = process.env.server2;
+const server3 = process.env.server3;
+const server4 = process.env.server4;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`)
@@ -831,4 +835,30 @@ client.on("guildCreate", guild => {
         icon: `https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048`
     })
   });
+client.on('guildMemberAdd', member => {
+  if (member.guild.id !== server1 && member.guild.id !== server2 && member.guild.id !== server3 && member.guild.id !== server4) return; 
+  const welcomeChannel = member.guild.channels.find('name', 'welcome');
+  if (welcomeChannel) {
+     let WelcomeEmbed = new Discord.RichEmbed()
+    .setAuthor(`${member.user.tag} (${member.user.id})`, `${member.user.displayAvatarURL}`)
+    .setDescription(`Hey ${member.user} , welcome to ${member.guild.name} 🎉🤗! `)
+    .setColor("#00bfff")
+    .setFooter(`(${member.guild.memberCount}) Members!`)
+    .setTimestamp();
+    welcomeChannel.send(WelcomeEmbed)
+  }
+});
+client.on('guildMemberRemove', member => {
+  if (member.guild.id !== server1 && member.guild.id !== server2 && member.guild.id !== server3 && member.guild.id !== server4) return; 
+  const byeChannel = member.guild.channels.find('name', 'welcome');
+  if (byeChannel) {
+    let byeEmbed = new Discord.RichEmbed()
+    .setAuthor(`${member.user.tag} (${member.user.id})`, `${member.user.displayAvatarURL}`)
+    .setDescription(`${member.user} just left the server 🙁!`)
+    .setColor("#ff0000")
+    .setFooter(`(${member.guild.memberCount}) Members!`)
+    .setTimestamp();
+    byeChannel.send(byeEmbed)
+  }
+});
 client.login(process.env.hello2);
