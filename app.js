@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const figlet = require('figlet');
+const YouTube = require("simple-youtube-api");
 const prefix = process.env.Prefix;
 const logchannel = process.env.LOG;
 const botlog = process.env.BOTLOG;
@@ -16,6 +17,7 @@ const server1 = process.env.server1;
 const server2 = process.env.server2;
 const server3 = process.env.server3;
 const server4 = process.env.server4;
+const youtube = new YouTube(process.env.YT);
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`)
@@ -130,11 +132,19 @@ const eyesembed = new Discord.RichEmbed()
   if (result > 80) return message.channel.send(eyesembed)
   };
   if (command === 'say') {
-    if(!message.member.hasPermission('MANAGE_MESSAGES') && message.author.id !== Dav && message.author.id !== Staff) return message.channel.send('You Can\'t use say command');
+    if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('You Can\'t use say command');
     let say = args.join(' ');
     message.delete();
     message.channel.send(say);
-    client.channels.get(botlog).send(`${message.author.tag} used say command **Server-Name**: ${message.guild.name}, **Server-ID**: ${message.guild.id}, **Channel**: ${message.channel}, **Message**: ${say}`)
+    let sayembed = new Discord.RichEmbed()
+    .setAuthor(`${message.author.tag} used say command`, message.author.avatarURL)
+    .addField(`Server-Name`, `${message.guild.name}`, inline = true)
+    .addField(`Server-ID`, `${message.guild.id}`, inline = true)
+    .addField(`Channel`,`${message.channel}` )
+    .addField(`Message`, `${say}`)
+    .setColor('#ff8000')
+    .setTimestamp();
+    client.channels.get(botlog).send(sayembed)
   }
   if (command === 'delete' || command === 'clean' || command === 'clear') {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return errors.noPerms(message, "MANAGE_MESSAGES");
@@ -591,6 +601,21 @@ if (command === "info" || command === "botinfo") {
         message.channel.send(`<@${tomute.id}> has been unmuted!`);
     }, ms(mutetime));
   }
+  if(command === 'youtube' && command === 'yt') {
+    youtube.searchVideos(args, 1)
+    .then(results => {
+
+      const ytEmbed = new Discord.RichEmbed()
+        .setAuthor(`YouTube search result for ${args}`.split(',').join(' '))
+        .setThumbnail(results[0].thumbnails.high.url)
+        .setColor('#ff0000')
+        .addField('Title', results[0].title, true)
+        .addField('Channel', results[0].channel.title, true)
+        .addField('Description', results[0].description)
+        .addField('Link', `https://youtu.be/${results[0].id}`);
+        message.channel.send(ytEmbed);
+    })
+  }
   if(command === 'admincmd' || command === 'admin') {
     if (message.author.id !== Dav && message.author.id !== Staff) return;
     let embed = new Discord.RichEmbed()
@@ -611,11 +636,18 @@ if (command === "info" || command === "botinfo") {
   } else {
   message.channel.send("This Command Is Only For Bot ADMIN!")
   }}
- if (command === 'ginvite') {
-    if (message.author.id !== Dav && message.author.id !== Staff) return;
-    let sv = client.guilds.get(args[0])
+if (command === 'ginvite') {
+    if (message.author.id !== Dav && message.author.id !== Vip) return;
+    const invite = await client.guilds.get(args[0]).channels.find(c => c.type !== 'category' && c.position === 0).createInvite({maxAge: 0});
     if (!sv) return message.channel.send(`Enter a valid guild id`)
-    sv.channels.random().createInvite({maxAge: 0}).then(a => message.channel.send(a.toString()))
+
+    let InviteEmbed = new Discord.RichEmbed()
+    .setTitle("Get Invite Admin Command")
+    .addField(`Server Invite:`, `${invite.url}`)
+    .setColor("#0008ff")
+    .setFooter(`${message.author.username}`, message.author.avatarURL)
+    .setTimestamp();
+    message.channel.send(InviteEmbed);
 
     let cembed = new Discord.RichEmbed()
     .setColor('#0400ff')
