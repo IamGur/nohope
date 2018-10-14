@@ -132,7 +132,7 @@ const eyesembed = new Discord.RichEmbed()
   if (result > 80) return message.channel.send(eyesembed)
   };
   if (command === 'say') {
-    if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('You Can\'t use say command');
+    if(message.author.id !== Dav && !message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('You Can\'t use say command');
     let say = args.join(' ');
     message.delete();
     message.channel.send(say);
