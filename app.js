@@ -845,28 +845,23 @@ client.on('message', async(message) => {
   };
 });
 client.on("guildCreate", guild => {
-    const liveJoin = client.channels.get("475564252036464651"); 
+
     let liveJEmbed = new Discord.RichEmbed()
     .setAuthor(client.user.username, client.user.avatarURL)
     .setColor('RANDOM')
     .setTitle(`Your Bot Has Started Serving A Guild`)
     .setDescription(`**Guild Name**: ${guild.name}\n**Guild ID**: ${guild.id}\n**Members Gained**: ${guild.memberCount}`)
-    liveJoin.send(liveJoin, liveJEmbed, {
-        name: `Chronic`,
-        icon: `https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048`
-    })
+    .addField('Total Members', client.users.size);
+    client.channels.get("475564252036464651").send(liveJEmbed)
   });
   client.on("guildDelete", guild => {
-    const liveLeave = client.channels.get("475564393057353728"); 
-    let liveLEmbed = new Discord.RichEmbed()
+    let LeaveEmbed = new Discord.RichEmbed()
     .setAuthor(client.user.username, client.user.avatarURL)
     .setColor('RANDOM')
     .setTitle(`Your Bot Has Stopped Serving A Guild`)
     .setDescription(`**Guild Name**: ${guild.name}\n**Guild ID**: ${guild.id}\n**Members Lost**: ${guild.memberCount}`)
-    liveLeave.send(liveLeave, liveLEmbed, {
-        name: `Chronic`,
-        icon: `https://cdn.discordapp.com/avatars/324432889561219072/4ab54e95443797898a1983feca3af755.png?size=2048`
-    })
+    .addField('Total Members', client.users.size);
+    client.channels.get("475564252036464651").send(LeaveEmbed)
   });
 client.on('guildMemberAdd', member => {
   if (member.guild.id !== server1 && member.guild.id !== server2 && member.guild.id !== server3 && member.guild.id !== server4 && member.guild.id !== server5) return; 
