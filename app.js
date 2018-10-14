@@ -476,7 +476,7 @@ if (command === "info" || command === "botinfo") {
     message.channel.send(embed);
   }
   if (command === 'role' || command === 'addrole') {
-    if(!message.member.hasPermission('MANAGE_MEMBERS') && message.author.id !== Dav) return message.reply("***Sorry, you can't do that.***");
+    if(message.author.id !== Dav && !message.member.hasPermission('MANAGE_MEMBERS')) return message.reply("***Sorry, you can't do that.***");
     let rMember = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
     if (!rMember) return message.reply("***Couldn't find that user.***");
     let role = args.join (" ").slice(22);
