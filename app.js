@@ -17,6 +17,7 @@ const server1 = process.env.server1;
 const server2 = process.env.server2;
 const server3 = process.env.server3;
 const server4 = process.env.server4;
+const server5 = process.env.server5;
 const youtube = new YouTube(process.env.YT);
 
 client.on('ready', () => {
@@ -868,7 +869,7 @@ client.on("guildCreate", guild => {
     })
   });
 client.on('guildMemberAdd', member => {
-  if (member.guild.id !== server1 && member.guild.id !== server2 && member.guild.id !== server3 && member.guild.id !== server4) return; 
+  if (member.guild.id !== server1 && member.guild.id !== server2 && member.guild.id !== server3 && member.guild.id !== server4 && member.guild.id !== server5) return; 
   const welcomeChannel = member.guild.channels.find('name', 'welcome');
   if (welcomeChannel) {
      let WelcomeEmbed = new Discord.RichEmbed()
@@ -881,7 +882,7 @@ client.on('guildMemberAdd', member => {
   }
 });
 client.on('guildMemberRemove', member => {
-  if (member.guild.id !== server1 && member.guild.id !== server2 && member.guild.id !== server3 && member.guild.id !== server4) return; 
+  if (member.guild.id !== server1 && member.guild.id !== server2 && member.guild.id !== server3 && member.guild.id !== server4 && member.guild.id !== server5) return; 
   const byeChannel = member.guild.channels.find('name', 'welcome');
   if (byeChannel) {
     let byeEmbed = new Discord.RichEmbed()
