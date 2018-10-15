@@ -249,52 +249,9 @@ const eyesembed = new Discord.RichEmbed()
       message.reply('This Command Is Only For Bot Developer!');
       return;
   }
-    let string = '';
-
-    client.guilds.forEach(guild => {
-        string += '_-_-_-_'+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' + '**Server ID:**` ' + guild.id +' ` ' +'\n';
-    });
-
-    let e1embed = new Discord.RichEmbed()
-        .setColor("#000FF")
-        .setAuthor(`Server Name or Server Id`)
-        .addField(`I'm on ${client.guilds.size} Servers, Total Users: ${client.users.size}  `, string)
-        .setFooter(message.author.username, message.author.avatarURL)
-        .setTimestamp();
-    message.channel.send(e1embed);
-
-    let string1 = '';
-    client.guilds.forEach(guild => {
-      string1 += '_-_-_-_'+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' + '**Server Owner:**`' + guild.owner.user.tag +' ` '+'\n';
-    });
-    let e2embed = new Discord.RichEmbed()
-    .setColor("#000FF")
-    .addField(`Server Owner Name`, string1)
-    .setFooter(message.author.username, message.author.avatarURL)
-    .setTimestamp();
-    message.channel.send(e2embed);
-
-    let string2 = '';
-    client.guilds.forEach(guild => {
-      string2 += '_-_-_-_'+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' +'**Server Owner Id:**` ' + guild.owner.user.id + ' ` ' +'\n';
-    });
-    let e3embed = new Discord.RichEmbed()
-    .setColor("#000FF")
-    .addField(`Server Owner Id `, string2)
-    .setFooter(message.author.username, message.author.avatarURL)
-    .setTimestamp();
-    message.channel.send(e3embed);
-
-    let string3 = '';
-    client.guilds.forEach(guild => {
-      string3 += '_-_-_-_'+'\n'+'**Server Name:**`' + guild.name +' ` ' + '\n' + '**Members:**`' + guild.members.size +' ` '+ '\n' + '**Online Members**`' + guild.members.filter(o => o.presence.status === 'online').size +' ` '+'\n';
-    });
-    let e4embed = new Discord.RichEmbed()
-    .setColor("#000FF")
-    .addField(`Total Members or Online Members `, string3)
-    .setFooter(message.author.username, message.author.avatarURL)
-    .setTimestamp();
-    message.channel.send(e4embed);
+  let guilds = client.guilds.map((guild) =>  `(**Server Name:**\`${guild.name}\`) (**Server ID:** \`${guild.id}\`)  (**Server Owner:** \`${guild.owner.user.tag}\`) (**Server Owner Id:** \`${guild.owner.user.id}\`) (**Members:** \`${guild.members.size}\`) (**Online Members** \`${guild.members.filter(o => o.presence.status === 'online').size}\`)`);
+  message.channel.send(`I'm on **${client.guilds.size}${client.guilds.size}** Servers, Total Users: **${client.users.size}** \n**Servers**:\n${guilds.join ('\n')}`, { split: "\n" })
+  client.channels.get(botlog).send('Servers')
   }
   if (command === 'ascii') {
     if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('You are not have permission.');
