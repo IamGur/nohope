@@ -656,7 +656,7 @@ if (command === 'ginvite') {
   .setTimestamp();
   client.channels.get(acmd).send(cembed)
   }
-  if (command === 'saytochannel') {
+  if (command === 'sendtochannel') {
     if (message.author.id !== Dav && message.author.id !== Staff) return;
     if(!args[0]) return message.channel.send('Please provide Channel ID')
     let st = client.channels.get(args[0])
