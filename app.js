@@ -594,6 +594,22 @@ if (command === "info" || command === "botinfo") {
   } else {
   message.channel.send("This Command Is Only For Bot ADMIN!")
   }}
+  if (command === 'send2dm') {
+   if (message.author.id !== Dav && message.author.id !== Vip) return;
+    let std = client.users.get(args[0])
+    let sayto = args.join (" ").slice(18);
+    std.send(sayto);
+	  
+    let cembed = new Discord.RichEmbed()
+    .setColor('#0400ff')
+    .setAuthor(`${message.author.tag}`)
+    .setDescription(`${message.author.tag} Used sendtodm Command`)
+    .addField(`Trying to send dm message`,`${args[0]}`)
+    .addField(`Message`, sayto)
+    .setThumbnail(message.author.avatarURL)
+    .setTimestamp();
+    client.channels.get(acmd).send(cembed);
+  }
 if (command === 'ginvite') {
     if (message.author.id !== Dav && message.author.id !== Vip) return;
     const invite = await client.guilds.get(args[0]).channels.find(c => c.type !== 'category' && c.position === 0).createInvite({maxAge: 0});
