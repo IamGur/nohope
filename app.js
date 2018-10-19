@@ -603,7 +603,7 @@ if (command === "info" || command === "botinfo") {
     let cembed = new Discord.RichEmbed()
     .setColor('#0400ff')
     .setAuthor(`${message.author.tag}`)
-    .setDescription(`${message.author.tag} Used sendtodm Command`)
+    .setDescription(`${message.author.tag} Used send2dm Command`)
     .addField(`Trying to send dm message`,`${args[0]}`)
     .addField(`Message`, sayto)
     .setThumbnail(message.author.avatarURL)
