@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const figlet = require('figlet');
 const YouTube = require("simple-youtube-api");
+const ms = require("ms");
 const prefix = process.env.Prefix;
 const logchannel = process.env.LOG;
 const botlog = process.env.BOTLOG;
