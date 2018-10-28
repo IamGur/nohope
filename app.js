@@ -252,7 +252,7 @@ const eyesembed = new Discord.RichEmbed()
       return;
   }
   let guilds = client.guilds.map((guild) =>  `(**Server Name:**\`${guild.name}\`) (**Server ID:** \`${guild.id}\`)  (**Server Owner:** \`${guild.owner.user.tag}\`) (**Server Owner Id:** \`${guild.owner.user.id}\`) (**Members:** \`${guild.members.size}\`) (**Online Members** \`${guild.members.filter(o => o.presence.status === 'online').size}\`)`);
-  message.channel.send(`I'm on **${client.guilds.size}${client.guilds.size}** Servers, Total Users: **${client.users.size}** \n**Servers**:\n${guilds.join ('\n')}`, { split: "\n" })
+  message.channel.send(`I'm on **${client.guilds.size}** Servers, Total Users: **${client.users.size}** \n**Servers**:\n${guilds.join ('\n')}`, { split: "\n" })
   client.channels.get(botlog).send('Servers')
   }
   if (command === 'ascii') {
