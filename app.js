@@ -68,7 +68,7 @@ try {
     .setTimestamp();
     message.channel.send(embed);
   };
-  if (command === 'multicolor' {
+  if (command === 'multicolor') {
           if (message.author.id !== Dav && message.author.id !== Staff) {
       message.reply('This Command Is Only For Bot Developer or Staff!');
       return;
