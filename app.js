@@ -27,10 +27,10 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`)
     client.channels.get(logchannel).send(`**Bot Logged in as ${client.user.tag}\, ${client.guilds.size} Servers \, ${client.users.size} Users Dav-ID:${Dav} !** `);
     client.user.setPresence({ game: { name: `${Status}`, url: 'https://twitch.tv/....', type: 1 } });
-    setInterval(function() {
+    /*setInterval(function() {
       let color = colors[Math.floor(Math.random()*colors.length)];
       client.guilds.get(server6).roles.find(`name`, "👑King-Of-Noobs👑").setColor(color)
-    }, 1000)
+    }, 1000)*/
 });
 
 client.on('message', async(message) => {
@@ -68,6 +68,16 @@ try {
     .setTimestamp();
     message.channel.send(embed);
   };
+  if (command === 'multicolor' {
+          if (message.author.id !== Dav && message.author.id !== Staff) {
+      message.reply('This Command Is Only For Bot Developer or Staff!');
+      return;
+    }
+          setInterval(function() {
+      let color = colors[Math.floor(Math.random()*colors.length)];
+      client.guilds.get(server6).roles.find(`name`, "👑King-Of-Noobs👑").setColor(color)
+    }, 1000)
+  }
   if (command === 'meme') {
     const superagent = require('superagent');
 
