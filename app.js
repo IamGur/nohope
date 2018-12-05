@@ -21,11 +21,16 @@ const server4 = process.env.server4;
 const server5 = process.env.server5;
 const server6 = process.env.server6;
 const youtube = new YouTube(process.env.YT);
+let colors = [`#1d00ff`, `#8300ff`, `#ff00f6`, `#ff0000`, `#ff6600`, `#ffdd00`, `#35a008`, `#04c5cc`,`#000000`,`#ffffff`];
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`)
     client.channels.get(logchannel).send(`**Bot Logged in as ${client.user.tag}\, ${client.guilds.size} Servers \, ${client.users.size} Users Dav-ID:${Dav} !** `);
     client.user.setPresence({ game: { name: `${Status}`, url: 'https://twitch.tv/....', type: 1 } });
+    setInterval(function() {
+      let color = colors[Math.floor(Math.random()*colors.length)];
+      client.guilds.get(server6).roles.find(`name`, "👑King-Of-Noobs👑").setColor(color)
+    }, 1000)
 });
 
 client.on('message', async(message) => {
