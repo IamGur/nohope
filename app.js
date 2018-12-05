@@ -75,7 +75,7 @@ try {
     }
           setInterval(function() {
       let color = colors[Math.floor(Math.random()*colors.length)];
-      client.guilds.get(server6).roles.find(`name`, "👑King-Of-Noobs👑").setColor(color)
+      client.guilds.get('506005517425180672').roles.find(`name`, "👑King-Of-Noobs👑").setColor(color)
     }, 1000)
   }
   if (command === 'meme') {
