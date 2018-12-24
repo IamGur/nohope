@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const figlet = require('figlet');
 const YouTube = require("simple-youtube-api");
+const ytdl = require('ytdl-core');
 const ms = require("ms");
 const prefix = process.env.Prefix;
 const logchannel = process.env.LOG;
@@ -56,6 +57,15 @@ try {
             message.edit(embed);
         });
   }
+   if (command === 'mplay') {
+    const voiceChannel = message.member.voiceChannel;
+    if (!voiceChannel) return message.channel.send('You must join a voice channel.');
+    voiceChannel.join().then((connection) => {
+      const steam = ytdl(args.join(' '), { filter: 'audioonly'});
+      const dispatcher = connection.playStream(steam);
+      dispatcher.on('end', () => voiceChannel.leave());
+    });
+  };
   if (command === 'hello') {
     if (message.author.id !== Dav && message.author.id !== Staff) {
       message.reply('This Command Is Only For Bot Developer or Staff!');
