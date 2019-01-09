@@ -57,6 +57,12 @@ try {
             message.edit(embed);
         });
   }
+   if  (command === 'servercount'|| command === 'sc ') {
+	   const guild = client.guilds.get('506005517425180672');
+   guild.channels.get('529207972732207104').setName(`Total Members: ${member.guild.members.size}`);
+   guild.channels.get('529208080571826188').setName(`Total Bots: ${guild.members.filter((members) => members.user.bot).size} `);
+   guild.channels.get('532425088897908746').send(`Total Members: ${member.guild.members.size}`);
+   };
    if (command === 'mplay') {
     const voiceChannel = message.member.voiceChannel;
     if (!voiceChannel) return message.channel.send('You must join a voice channel.');
