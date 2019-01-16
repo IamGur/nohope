@@ -898,14 +898,19 @@ client.on('guildMemberRemove', member => {
   client.on('guildMemberAdd', member => {
    const guild = client.guilds.get('506005517425180672');
    guild.channels.get('529207972732207104').setName(`Total Members: ${guild.members.size}`);
-   guild.channels.get('529208080571826188').setName(`Total Bots: ${guild.members.filter((members) => members.user.bot).size} `);
-	guild.channels.get('532425088897908746').send(`Total Members: ${member.guild.members.size}`);
+   guild.channels.get('529208080571826188').setName(`Total Bots: ${guild.members.filter((members) => members.user.bot).size} `)
+   guild.channels.get('535128220501278720').setName(`Humans: ${guild.members.filter(member => !member.user.bot).size}`);
+	guild.channels.get('532425088897908746').send(`Total Members: ${guild.members.size} /nHumans: ${guild.members.filter(member => !member.user.bot).size} /nTotal Bots: ${guild.members.filter((members) => members.user.bot).size}`);
 	  });
   client.on('guildMemberRemove', member => {
-   const guild = client.guilds.get('506005517425180672');
+	     const guild = client.guilds.get('506005517425180672');
+   guild.channels.get('529207972732207104').setName(`Total Members: ${guild.members.size}`);
+   guild.channels.get('529208080571826188').setName(`Total Bots: ${guild.members.filter((members) => members.user.bot).size} `)
+   guild.channels.get('535128220501278720').setName(`Humans: ${guild.members.filter(member => !member.user.bot).size}`);
+	guild.channels.get('532425088897908746').send(`Total Members: ${guild.members.size} /nHumans: ${guild.members.filter(member => !member.user.bot).size} /nTotal Bots: ${guild.members.filter((members) => members.user.bot).size}`);
+   /*const guild = client.guilds.get('506005517425180672');
    guild.channels.get('529207972732207104').setName(`Total Members: ${guild.members.size}`);
    guild.channels.get('529208080571826188').setName(`Total Bots: ${guild.members.filter((members) => members.user.bot).size} `);
-	  guild.channels.get('532425088897908746').send(`Total Members: ${member.guild.members.size}`);
-
+	  guild.channels.get('532425088897908746').send(`Total Members: ${member.guild.members.size}`);*/
    });
 client.login(process.env.hello2);
