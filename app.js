@@ -869,7 +869,7 @@ client.on("guildCreate", guild => {
     .addField('Total Members', client.users.size);
     client.channels.get("475564252036464651").send(LeaveEmbed)
   });
-/*client.on('guildMemberAdd', member => {
+client.on('guildMemberAdd', member => {
   if (member.guild.id !== server1 && member.guild.id !== server2 && member.guild.id !== server3 && member.guild.id !== server4 && member.guild.id !== server5 && member.guild.id !== server6) return; 
   const welcomeChannel = member.guild.channels.find('name', 'welcome');
   if (welcomeChannel) {
@@ -894,16 +894,16 @@ client.on('guildMemberRemove', member => {
     .setTimestamp();
     byeChannel.send(byeEmbed)
   }
-});*/
+});
   client.on('guildMemberAdd', member => {
    const guild = client.guilds.get('506005517425180672');
-   guild.channels.get('529207972732207104').setName(`Total Members: ${member.guild.members.size}`);
+   guild.channels.get('529207972732207104').setName(`Total Members: ${guild.members.size}`);
    guild.channels.get('529208080571826188').setName(`Total Bots: ${guild.members.filter((members) => members.user.bot).size} `);
 	guild.channels.get('532425088897908746').send(`Total Members: ${member.guild.members.size}`);
 	  });
   client.on('guildMemberRemove', member => {
    const guild = client.guilds.get('506005517425180672');
-   guild.channels.get('529207972732207104').setName(`Total Members: ${member.guild.members.size}`);
+   guild.channels.get('529207972732207104').setName(`Total Members: ${guild.members.size}`);
    guild.channels.get('529208080571826188').setName(`Total Bots: ${guild.members.filter((members) => members.user.bot).size} `);
 	  guild.channels.get('532425088897908746').send(`Total Members: ${member.guild.members.size}`);
 
