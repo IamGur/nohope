@@ -875,7 +875,7 @@ client.on("guildCreate", guild => {
     client.channels.get("475564252036464651").send(LeaveEmbed)
   });
 client.on('guildMemberAdd', member => {
-  if (member.guild.id !== server1 && member.guild.id !== server2 && member.guild.id !== server3 && member.guild.id !== server4 && member.guild.id !== server5 && member.guild.id !== server6 && member.guild.id = '441132393315827714') return; 
+  if (member.guild.id !== server1 && member.guild.id !== server2 && member.guild.id !== server3 && member.guild.id !== server4 && member.guild.id !== server5 && member.guild.id !== server6 && member.guild.id !== '441132393315827714') return; 
   const welcomeChannel = member.guild.channels.find('name', 'welcome');
   if (welcomeChannel) {
      let WelcomeEmbed = new Discord.RichEmbed()
