@@ -360,7 +360,7 @@ if (command === "info" || command === "botinfo") {
         .addField("Total Text Channels", `${client.channels.filter(e => e.type !== 'voice').size}`, inline = true)
         .addField("Total Voice Channels", `${client.channels.filter(e => e.type === 'voice').size}`, inline = true)
         .addField("Total Users", `${client.users.size}`, inline = true)
-        .addField(`Online Users`, `${message.guild.members.filter(o => o.presence.status === 'online').size}`, inline = true)
+        .addField(`Online Users`, `${client.guilds.members.filter(o => o.presence.status === 'online').size}`, inline = true)
         .addField("Support Server", `[link](${serverlink})`, inline = true)
         .addField("Bot Invite Link", `[invite](https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`, inline = true)
         .setThumbnail(`https://cdn.discordapp.com/avatars/476388312517574663/c110bf51cf9a6c34ad2720842d30e7eb.png?size=2048`)
