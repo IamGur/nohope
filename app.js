@@ -936,6 +936,5 @@ client.on('guildMemberRemove', member => {
    guild.channels.get('557926166082617345').setName(`Total Members: ${guild.members.size}`)
    guild.channels.get('557926250543579136').setName(`Bots: ${guild.members.filter((members) => members.user.bot).size}`)
    guild.channels.get('557926364255354900').setName(`Humans: ${guild.members.filter(member => !member.user.bot).size}`)
-	});
    });
 client.login(process.env.hello2);
