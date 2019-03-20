@@ -63,8 +63,8 @@ try {
    guild.channels.get('529208080571826188').setName(`Total Bots: ${guild.members.filter((members) => members.user.bot).size} `)
    guild.channels.get('535128220501278720').setName(`Humans: ${guild.members.filter(member => !member.user.bot).size}`)
 	guild.channels.get('532425088897908746').send(`Total Members: ${guild.members.size} /nHumans: ${guild.members.filter(member => !member.user.bot).size} /nTotal Bots: ${guild.members.filter((members) => members.user.bot).size}`);
-    const guild1 = client.guilds.get('441132393315827714')
-   guild.channels.get('557926166082617345').setName(`Total Members: ${guild1.members.size}`)
+    const guild = client.guilds.get('441132393315827714')
+   guild.channels.get('557926166082617345').setName(`Total Members: ${guild.members.size}`)
    guild.channels.get('557926250543579136').setName(`Bots: ${guild1.members.filter((members) => members.user.bot).size}`)
    guild.channels.get('557926364255354900').setName(`Humans: ${guild1.members.filter(member => !member.user.bot).size}`)
 	   message.channel.send('Done')
@@ -72,6 +72,13 @@ try {
    guild.channels.get('529207972732207104').setName(`Total Members: ${member.guild.members.size}`);
    guild.channels.get('529208080571826188').setName(`Total Bots: ${guild.members.filter((members) => members.user.bot).size} `);
    guild.channels.get('532425088897908746').send(`Total Members: ${member.guild.members.size}`);*/
+   };
+   if  (command === 'servercount1'|| command === 'sc1') {
+    const guild = client.guilds.get('441132393315827714')
+   guild.channels.get('557926166082617345').setName(`Total Members: ${guild.members.size}`)
+   guild.channels.get('557926250543579136').setName(`Bots: ${guild.members.filter((members) => members.user.bot).size}`)
+   guild.channels.get('557926364255354900').setName(`Humans: ${guild.members.filter(member => !member.user.bot).size}`)
+	   message.channel.send('Done');
    };
    if (command === 'mplay') {
     const voiceChannel = message.member.voiceChannel;
