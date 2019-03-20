@@ -66,7 +66,8 @@ try {
     const guild1 = client.guilds.get('441132393315827714')
    guild.channels.get('557926166082617345').setName(`Total Members: ${guild1.members.size}`)
    guild.channels.get('557926250543579136').setName(`Bots: ${guild1.members.filter((members) => members.user.bot).size}`)
-   guild.channels.get('557926364255354900').setName(`Humans: ${guild1.members.filter(member => !member.user.bot).size}`);
+   guild.channels.get('557926364255354900').setName(`Humans: ${guild1.members.filter(member => !member.user.bot).size}`)
+	   message.channel.send('Done')
 	  /* const guild = client.guilds.get('506005517425180672');
    guild.channels.get('529207972732207104').setName(`Total Members: ${member.guild.members.size}`);
    guild.channels.get('529208080571826188').setName(`Total Bots: ${guild.members.filter((members) => members.user.bot).size} `);
