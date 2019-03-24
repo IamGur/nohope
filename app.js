@@ -356,20 +356,20 @@ const eyesembed = new Discord.RichEmbed()
         .setTimestamp();
     message.channel.send(embed);
   }
-if (command === "info" || command === "botinfo") {
+if (command === 'botinfo' || command === 'info') {
     let embed = new Discord.RichEmbed()
         .setTitle("Bot Info")
         .setColor("RANDOM")
-        .setDescription(``)
-        .addField("Help Commamd", `${prefix}help`)
-        .addField("Total Servers", `${client.guilds.size}`, inline = true)
-        .addField("Total Channels", `${client.channels.size}`, inline = true)
-        .addField("Total Text Channels", `${client.channels.filter(e => e.type !== 'voice').size}`, inline = true)
-        .addField("Total Voice Channels", `${client.channels.filter(e => e.type == 'voice').size}`, inline = true)
-        .addField("Total Users", `${client.users.size}`, inline = true)
-        .addField(`Online Users`, `${client.guilds.members.filter(o => o.presence.status === 'online').size}`, inline = true)
-        .addField("Support Server", `[link](${serverlink})`, inline = true)
-        .addField("Bot Invite Link", `[invite](https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`, inline = true)
+        //.setDescription(``)
+        .addField('Help Commamd', `${prefix}help`)
+        .addField('Total Servers', `${client.guilds.size}`, inline = true)
+        .addField('Total Channels', `${client.channels.size}`, inline = true)
+        .addField('Total Text Channels', `${client.channels.filter(e => e.type !== 'voice').size}`, inline = true)
+        .addField('Total Voice Channels', `${client.channels.filter(e => e.type == 'voice').size}`, inline = true)
+        .addField('Total Users', `${client.users.size}`, inline = true)
+        .addField(`Online Users`, `${client.guild.members.filter(o => o.presence.status === 'online').size}`, inline = true)
+        .addField('Support Server', `[link](${serverlink})`, inline = true)
+        .addField('Bot Invite Link', `[invite](https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`, inline = true)
         .setThumbnail(`https://cdn.discordapp.com/avatars/476388312517574663/c110bf51cf9a6c34ad2720842d30e7eb.png?size=2048`)
         .setURL(`https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`)
         .setTimestamp();
