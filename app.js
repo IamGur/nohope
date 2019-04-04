@@ -114,8 +114,8 @@ try {
     voiceChannel.join().then((connection) => {
       const steam = ytdl(args.join(' '), { filter: 'audioonly'});
       const dispatcher = connection.playStream(steam);
-      dispatcher.on('end', () => voiceChannel.leave());*/
-    });
+      dispatcher.on('end', () => voiceChannel.leave());
+    });*/
   };
   if (command === 'hello') {
     if (message.author.id !== Dav && message.author.id !== Staff) {
