@@ -76,7 +76,7 @@ try {
 	   message.channel.send('Done');
    };
    if (command === 'mplay') {
-	           const youtube = new YouTube(process.env.GOOGLEAPIKEY);
+	           const youtube = new YouTube(process.env.YT);
         const voiceChannel = message.member.voiceChannel;
         let args0 = args.join("").substring(command.length);
         let searchString = args0.slice();
