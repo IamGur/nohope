@@ -85,7 +85,7 @@ try {
     var server = servers[message.guild.id];
 
     server.queue.push(args[1]);
-    message.channel.send("Your song of choice is on the queue. \(!args[1]\)")
+    message.channel.send("Your song of choice is on the queue. \(${!args[1]}\)")
     if(!message.member.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
         play(connection, message);
     })
