@@ -103,7 +103,7 @@ try {
                     const videoIndex = 1
                     var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
                 } catch (err) {
-                    bot.channels.get(error).send(`${message.author.tag} from ${message.guild.name} trying to use play command but i got a error ${err}`)
+                    client.channels.get(error).send(`${message.author.tag} from ${message.guild.name} trying to use play command but i got a error ${err}`)
                     return message.channel.send('no search results found.');
                 }
             }
