@@ -75,48 +75,15 @@ try {
    guild.channels.get('557926364255354900').setName(`Humans: ${guild.members.filter(member => !member.user.bot).size}`)
 	   message.channel.send('Done');
    };
-   if (command === 'mplay') {
-	           const youtube = new YouTube(process.env.YT);
-        const voiceChannel = message.member.voiceChannel;
-        let args0 = args.join("").substring(command.length);
-        let searchString = args0.slice();
-        const url = args0 ? args0.replace(/<(.+)>/g, '$1') : '';
-        if (!voiceChannel) return message.channel.send("You are not in a voice channel please join a channel and use this command again");
-        const permissions = voiceChannel.permissionsFor(message.client.user);
-        if (!permissions.has('CONNECT')) return message.channel.send("I do not have the permissions to join that voice channel pleae give me permissions to join");
-        if (!permissions.has("SPEAK")) return message.channel.send("I do not have the permissions to speak in that voice channel pleae give me permissions to join");
-        if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-            const playlist = await youtube.getPlaylist(url);
-            const videos = await playlist.getVideos();
-            for (const video of Object.values(videos)) {
-                const video2 = await youtube.getVideoByID(video.id);
-                await addSong(message, video2, voiceChannel, true);
-            }
-            return message.channel.send(`✅ Playlist: **${playlist.title}** has been added to the queue!`);
-        } else {
-            try {
-                var video = await youtube.getVideo(url);
-            } catch (error) {
-                try {
-                    var videos = await youtube.searchVideos(searchString, 1);
-			
-                    const videoIndex = 1
-                    var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
-                } catch (err) {
-                    client.channels.get('475574421441216522').send(`${message.author.tag} from ${message.guild.name} trying to use play command but i got a error ${err}`)
-                    return message.channel.send('no search results found.');
-                }
-            }
-            return addSong(message, video, voiceChannel);
-        }
+   /*if (command === 'mplay') {
     /*const voiceChannel = message.member.voiceChannel;
     if (!voiceChannel) return message.channel.send('You must join a voice channel.');
     voiceChannel.join().then((connection) => {
       const steam = ytdl(args.join(' '), { filter: 'audioonly'});
       const dispatcher = connection.playStream(steam);
       dispatcher.on('end', () => voiceChannel.leave());
-    });*/
-  };
+    });
+  };*/
   if (command === 'hello') {
     if (message.author.id !== Dav && message.author.id !== Staff) {
       message.reply('This Command Is Only For Bot Developer or Staff!');
