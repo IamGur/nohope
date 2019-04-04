@@ -70,7 +70,7 @@ try {
         });
   }
    if (command === "playtest") {
-    if (!args[1]) {
+    if (!args[0]) {
          message.channel.send("Please specify a link");
          return
     }
@@ -84,8 +84,8 @@ try {
     }
     var server = servers[message.guild.id];
 
-    server.queue.push(args[1]);
-    message.channel.send("Your song of choice is on the queue. \(${!args[1]}\)")
+    server.queue.push(args[]);
+    message.channel.send("Your song of choice is on the queue. ${args[1]}")
     if(!message.member.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
         play(connection, message);
     })
