@@ -23,7 +23,6 @@ const server5 = process.env.server5;
 const server6 = process.env.server6;
 const youtube = new YouTube(process.env.YT);
 var servers = {};
-var queue = {};
 let colors = [`#1d00ff`, `#8300ff`, `#ff00f6`, `#ff0000`, `#ff6600`, `#ffdd00`, `#35a008`, `#04c5cc`,`#000000`,`#ffffff`];
 
 
