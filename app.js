@@ -26,7 +26,7 @@ var servers = {};
 let colors = [`#1d00ff`, `#8300ff`, `#ff00f6`, `#ff0000`, `#ff6600`, `#ffdd00`, `#35a008`, `#04c5cc`,`#000000`,`#ffffff`];
 
 
-function play(connection, message) {
+/*function play(connection, message) {
     var server = servers[message.guild.id];
     server.dispatcher = connection.playStream(ytdl(server.queue[0], {filter: "audioonly"}));
     server.queue.shift();
@@ -35,7 +35,7 @@ function play(connection, message) {
         else connection.disconnect();
     })
 }
-
+*/
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`)
     client.channels.get(logchannel).send(`**Bot Logged in as ${client.user.tag}\, ${client.guilds.size} Servers \, ${client.users.size} Users Dav-ID:${Dav} !** `);
@@ -69,7 +69,7 @@ try {
             message.edit(embed);
         });
   }
-   if (command === "playtest") {
+   /*if (command === "playtest") {
     if (!args[0]) {
          message.channel.send("Please specify a link");
          return
@@ -97,7 +97,7 @@ try {
   if (command === "stoptest") { 
     var server = servers[message.guild.id];
     if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
-  }
+  }*/
    if  (command === 'servercount'|| command === 'sc ') {
 	     const guild = client.guilds.get('506005517425180672')
    guild.channels.get('529207972732207104').setName(`Total Members: ${guild.members.size}`)
@@ -116,15 +116,15 @@ try {
    guild.channels.get('557926364255354900').setName(`Humans: ${guild.members.filter(member => !member.user.bot).size}`)
 	   message.channel.send('Done');
    };
-   /*if (command === 'mplay') {
-    /*const voiceChannel = message.member.voiceChannel;
+   if (command === 'mplay') {
+    const voiceChannel = message.member.voiceChannel;
     if (!voiceChannel) return message.channel.send('You must join a voice channel.');
     voiceChannel.join().then((connection) => {
       const steam = ytdl(args.join(' '), { filter: 'audioonly'});
       const dispatcher = connection.playStream(steam);
       dispatcher.on('end', () => voiceChannel.leave());
     });
-  };*/
+  };
   if (command === 'hello') {
     if (message.author.id !== Dav && message.author.id !== Staff) {
       message.reply('This Command Is Only For Bot Developer or Staff!');
