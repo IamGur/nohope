@@ -22,7 +22,19 @@ const server4 = process.env.server4;
 const server5 = process.env.server5;
 const server6 = process.env.server6;
 const youtube = new YouTube(process.env.YT);
+var servers = {};
 let colors = [`#1d00ff`, `#8300ff`, `#ff00f6`, `#ff0000`, `#ff6600`, `#ffdd00`, `#35a008`, `#04c5cc`,`#000000`,`#ffffff`];
+
+
+function play(connection, message) {
+    var server = servers[message.guild.id];
+    server.dispatcher = connection.playStream(ytdl(server.queue[0], {filter: "audioonly"}));
+    server.queue.shift();
+    server.dispatcher.on("end", function() {
+        if(server.queue[0]) play(connection, messsage);
+        else connection.disconnect();
+    })
+}
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`)
@@ -56,6 +68,35 @@ try {
             .setTimestamp();
             message.edit(embed);
         });
+  }
+   if (command === "playtest") {
+    if (!args[0]) {
+         message.channel.send("Please specify a link");
+         return
+    }
+    
+    if(!message.member.voiceChannel) {
+        message.channel.sned("I think it may work better if you are in a voice channel!");
+    }
+
+    if(!servers[message.guild.id]) servers[message.guild.id] = {
+        queue: []
+    }
+    var server = servers[message.guild.id];
+
+    server.queue.push(args[0]);
+    message.channel.send("Your song of choice is on the queue. ")
+    if(!message.member.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
+        play(connection, message);
+    })
+   }
+  if (command === "skiptest") { 
+    var server = servers[message.guild.id];
+    if (server.dispatcher) server.dispatcher.end();
+  }
+  if (command === "stoptest") { 
+    var server = servers[message.guild.id];
+    if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
   }
    if  (command === 'servercount'|| command === 'sc ') {
 	     const guild = client.guilds.get('506005517425180672')
