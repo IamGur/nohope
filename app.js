@@ -244,8 +244,7 @@ const eyesembed = new Discord.RichEmbed()
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return errors.noPerms(message, "MANAGE_MESSAGES");
     if(!args[0]) return message.channel.send(`Example:[${prefix}Delete/Clean/Clear 100]`);
      message.delete();
-	console.error(err);
-    message.channel.bulkDelete(args[0], true).then(() => {
+    message.channel.bulkDelete(args[0]).then(() => {
       message.channel.send(`Deleted ${args[0]} messages.`).then(msg => msg.delete(5000));
     })
   }
