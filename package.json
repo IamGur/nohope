@@ -1,28 +1,22 @@
-{
+  {
   "name": "bot",
-  "name": "testbot",
   "version": "1.0.0",
-  "description": "Bot",
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "discord.js": "^11.4.2"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Gur",
-  "license": "ISC",
-  "dependencies": {
     "discord.js": "^11.4.2",
-
     "ms": "^2.1.1",
+    "figlet": "^1.2.0",
     "fs": "0.0.1-security",
     "node-opus": "^0.3.0",
     "ytdl-core": "^0.24.0",
     "simple-youtube-api": "^5.0.2",
     "superagent": "^3.8.3"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "license": "ISC"
+  "author": "Gur",
 }
