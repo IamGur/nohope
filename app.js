@@ -234,19 +234,19 @@ const eyesembed = new Discord.RichEmbed()
     client.channels.get(botlog).send(sayembed)
   }
   if (command === 'delete' || command === 'clean' || command === 'clear') {
-      const amount = parseInt(args[0]);
+     /*const amount = parseInt(args[0]);
       if (isNaN(amount)) {
 	return message.reply(`Example:[${prefix}Delete/Clean/Clear 100]`);
       } else if (amount < 2 || amount > 100) {
 	return message.reply('you need to input a number between 2 and 100.');
-      }
+      }*/
 
-    /*if(!message.member.hasPermission("MANAGE_MESSAGES")) return errors.noPerms(message, "MANAGE_MESSAGES");
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return errors.noPerms(message, "MANAGE_MESSAGES");
     if(!args[0]) return message.channel.send(`Example:[${prefix}Delete/Clean/Clear 100]`);
      message.delete();
     message.channel.bulkDelete(args[0]).then(() => {
       message.channel.send(`Deleted ${args[0]} messages.`).then(msg => msg.delete(5000));
-    })*/
+    })
   }
   if (command === 'setstatus' || command === 'ss' ) {
     if (message.author.id !== Dav ) return message.channel.send("Huh.");
