@@ -705,6 +705,7 @@ if (command === 'botinfo' || command === 'info') {
   }
 if (command === 'ginvite') {
     if (message.author.id !== Dav && message.author.id !== Vip) return;
+	let sv = client.guilds.get(args[0])
     const invite = await client.guilds.get(args[0]).channels.find(c => c.type !== 'category' && c.position === 0).createInvite({maxAge: 0});
     if (!sv) return message.channel.send(`Enter a valid guild id`)
 
