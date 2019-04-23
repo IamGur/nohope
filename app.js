@@ -69,9 +69,9 @@ try {
             message.edit(embed);
         });
   }
-     if (command === 'say2') {
+     if (command === 'GIF') {
        const attachment = new Discord.Attachment('https://cdn.discordapp.com/attachments/565429196436930560/566467881139961866/aaaaaaa.gif');
-       message.channel.send(attachment);
+       message.channel.send('    ',attachment);
         };
    /*if (command === "playtest") {
     if (!args[0]) {
