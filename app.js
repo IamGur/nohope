@@ -404,7 +404,7 @@ const eyesembed = new Discord.RichEmbed()
         .setTimestamp();
     message.channel.send(embed);
   }
-if (command === 'botinfo' || command === 'info') {
+/*if (command === 'botinfo' || command === 'info') {
     let embed = new Discord.RichEmbed()
         .setTitle("Bot Info")
         .setColor("RANDOM")
@@ -422,7 +422,26 @@ if (command === 'botinfo' || command === 'info') {
         .setURL(`https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`)
         .setTimestamp();
     message.channel.send(embed);
-}
+}*/
+  if (command === 'botinfo' || command === 'info') {
+    let embed = new Discord.RichEmbed()
+        .setTitle("Bot Info")
+        .setColor("RANDOM")
+        //.setDescription(``)
+        .addField('Help Commamd', `${prefix}help`)
+        .addField('Total Servers', `${client.guilds.size}`)
+        .addField('Total Channels', `${client.channels.size}`)
+        .addField('Total Text Channels', `${client.channels.filter(e => e.type !== 'voice').size}`)
+        .addField('Total Voice Channels', `${client.channels.filter(e => e.type == 'voice').size}`)
+        .addField('Total Users', `${client.users.size}`)
+        .addField('Online Users', `${client.users.filter(o => o.presence.status === 'online').size}`)
+        .addField('Support Server', `[link](https://discord.gg/7uU3MDD)`)
+        .addField('Bot Invite Link', `[invite](https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)`,)
+        .setThumbnail(`https://cdn.discordapp.com/avatars/476388312517574663/c110bf51cf9a6c34ad2720842d30e7eb.png?size=2048`)
+        .setURL(`https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`)
+        .setTimestamp();
+    message.channel.send(embed);
+  }
   if (command === 'emoji') {
     try {
       let emojis;
